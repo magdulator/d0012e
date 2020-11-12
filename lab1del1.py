@@ -65,6 +65,16 @@ class Graph:
                 v1 = x.getNode()
                 v2 = y.getNode()
                 print(v1, v2, x.getWeight(y))
+
+    def printNeighbors(self, v):
+        if (v not in self.edgesDict):
+            print(v + "is not an exisitng node")
+
+        string = v
+        x = self.edgesDict.get(v)
+        for y in x.getConnections():
+            string = string + str(x.getWeight(y)) + " -> " + str(y.getNode())
+        print(string)
                 
 
     def printMatrix(self):                      #print the matrix
