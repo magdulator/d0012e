@@ -14,7 +14,7 @@ class Graph:
             for vertex in self.matrix:
                 vertex.append(0)
         temp = []
-        for i in range(self.nodeSize):
+        for z in range(self.nodeSize):
             temp.append(0)
         self.matrix.append(temp)
         
@@ -39,7 +39,7 @@ class Graph:
             self.matrix[pos2][pos1] = weight
         else:
             print("Use positive weights")
-            
+
 
     def getWeight(self, v1, v2):                # get the wheight for two nodes
         pos1 = self.nodes.index(v1)                
