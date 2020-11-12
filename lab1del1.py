@@ -103,5 +103,5 @@ g.edgesDict['a'].setWeight(g.edgesDict['b'], 20) # set new weight of a->b and b-
 g.printGraph()
 
 g.printMatrix()
-
+g.printNeighbors('a')
 
