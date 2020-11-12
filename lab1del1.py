@@ -39,12 +39,13 @@ class Graph:
             self.matrix[pos2][pos1] = weight
         else:
             print("Use positive weights")
+            
 
     def getWeight(self, v1, v2):                # get the wheight for two nodes
         pos1 = self.nodes.index(v1)                
         pos2 = self.nodes.index(v2)
         print(self.matrix[pos1][pos2])
-            
+
                 
     def printMatrix(self):                      #print the matrix
         print(self.nodes)
