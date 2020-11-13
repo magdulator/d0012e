@@ -69,5 +69,5 @@ g.addEdge('e', 'd', 6)
 
 
 
-g.setWeight('a','b', 20)
+g.setWeight('a','b', 9)
 g.printMatrix()
