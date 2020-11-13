@@ -32,7 +32,7 @@ class Graph:
         self.edgesDict[node] = newNode  #key: 'a', value: Edge object
         return newNode
 
-    def addEdge(self, v1, v2, weight): # O(2) + O(2) + O(3)
+    def addEdge(self, v1, v2, weight): # O(5)
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
         elif (v2 not in self.edgesDict):
@@ -41,14 +41,14 @@ class Graph:
             self.edgesDict[v1].addConnection(self.edgesDict[v2], weight)    #two way connection
             self.edgesDict[v2].addConnection(self.edgesDict[v1], weight)
 
-    def printGraph(self): #O(n^2)
+    def printGraph(self): #O(3n^2)
         for x in self.edgesDict.values():
             for y in x.getConnections():
                 v1 = x.getNode()
                 v2 = y.getNode()
                 print(v1, v2, x.getWeight(y))
 
-    def printNeighbors(self, v): O(1)+ O(2+N)+ O(1)
+    def printNeighbors(self, v): O(n+4)
         if (v not in self.edgesDict):
             print(v + "is not an exisitng node")
         else:
