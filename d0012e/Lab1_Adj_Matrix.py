@@ -1,10 +1,12 @@
+
 class Graph:
     def __init__(self):
         self.nodes = []     # store all the nodes in a list
         self.nodeSize = 0   # amount of nodes
         self.matrix = []    # the matrix with lists in lists
         
-        
+
+    #O(2n+c) 
     def addNode(self, node):
         if node in self.nodes:                  # Cancels nodes that are similar
             print("Node", node, "already exists")
@@ -18,7 +20,8 @@ class Graph:
             temp.append(0)
         self.matrix.append(temp)
         
-            
+
+    #O(c)     
     def addEdge(self, v1, v2, weight):
         if (v1 not in self.nodes):                  # cancels if nodes not exist
             print(v1, "is not an existing node")
@@ -30,7 +33,7 @@ class Graph:
             self.matrix[pos1][pos2] = weight
             self.matrix[pos2][pos1] = weight
             
-            
+    #O(c)     
     def setWeight(self, v1, v2, weight):        # sets weight for a -> b and b -> a to same
         if (weight >= 0):
             pos1 = self.nodes.index(v1)         
@@ -39,14 +42,9 @@ class Graph:
             self.matrix[pos2][pos1] = weight
         else:
             print("Use positive weights")
+            
 
-
-    def getWeight(self, v1, v2):                # get the wheight for two nodes
-        pos1 = self.nodes.index(v1)                
-        pos2 = self.nodes.index(v2)
-        print(self.matrix[pos1][pos2])
-
-                
+    #O(n+c)            
     def printMatrix(self):                      #print the matrix
         print(self.nodes)
         for i in range(self.nodeSize):
@@ -56,7 +54,7 @@ class Graph:
 g = Graph()
 
 g.addNode('a')
-g.addNode('b')
+g.addNode('b')  
 g.addNode('c')
 g.addNode('d')
 g.addNode('e')
@@ -69,6 +67,7 @@ g.addEdge('c', 'b', 4)
 g.addEdge('e', 'd', 6)
 
 
+
+
 g.setWeight('a','b', 20)
-g.getWeight('c', 'b')
 g.printMatrix()
