@@ -15,7 +15,7 @@ class Edge:
     def getWeight(self, neighbor): # O(1)
         return self.edges[neighbor]
 
-    def setWeight(self, neighbor, weight): #O(2) + O(1)
+    def setWeight(self, neighbor, weight): #O(2)
         if (weight >= 0):
             self.edges[neighbor] = weight   # sets weight for a -> b and b -> a to same 
             neighbor.edges[self] = weight
