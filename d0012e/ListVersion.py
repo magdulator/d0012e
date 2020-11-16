@@ -49,6 +49,32 @@ class Graph:
         else:
             self.edgesDict[v1].setWeight(g.edgesDict[v2], 20)
 
+    def connectivity(self):
+        nodesList = [] #All current nodes in tree
+        connectedList = [] #Connected nodes in tree
+        nodesList = list(self.edgesDict.keys())
+
+        connectedList.append(nodesList[0])
+        if not self.edgesDict[connectedList[0]].getConnections():
+                return False
+
+        for v in connectedList:
+            x = self.edgesDict.get(v)
+            for y in x.getConnections():
+                if y.getNode() not in connectedList:
+                    connectedList.append(y.getNode())
+
+        if len(connectedList) == len(nodesList):
+            return True
+        else:
+            return False    
+        
+
+
+
+
+            
+
     def printGraph(self): #O(3n^2)
         for x in self.edgesDict.values():
             for y in x.getConnections():
@@ -82,3 +108,4 @@ g.setWeight('a', 'b', 20) # set new weight of a->b and b-> a
 
 g.printGraph()
 g.printNeighbors('a')
+print(g.connectivity())
