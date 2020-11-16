@@ -10,6 +10,7 @@ class Graph:
     def addNode(self, node):
         if node in self.nodes:                  # Cancels nodes that are similar
             print("Node", node, "already exists")
+            return()
         self.nodes.append(node)                 # add node to list
         self.nodeSize = self.nodeSize +1        # add 1 to nodesize
         if self.nodeSize > 1:                   #Make the matrix right size and filled with zeros
