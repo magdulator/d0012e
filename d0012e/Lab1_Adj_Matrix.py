@@ -50,6 +50,27 @@ class Graph:
         print(self.nodes)
         for i in range(self.nodeSize):
             print(self.nodes[i], self.matrix[i])
+            
+     
+    def getConnected(self): (
+        fifo = []                           # First in first out (list of temp connections)
+        connected = [False]*self.nodeSize   # A false graph
+        count = 0
+        fifo.append(0)                      # Start with the first node numbber 0
+        while len(fifo) > 0:                # If fifo is empty stop 
+            node = fifo[0]
+            del fifo[0]
+            if connected[node] == False:
+                count = count + 1
+                connected[node] = True
+                for i in range(self.nodeSize):      # place new connections in fifo
+                    if self.matrix[node][i] > 0:
+                        fifo.append(i)
+          
+        if self.nodeSize == count:                  # If the number of "nodes findid" == nodes in total true
+            print("The graph is connected")
+        else:
+            print("The graph is not connected")
 
             
 g = Graph()
@@ -69,6 +90,6 @@ g.addEdge('e', 'd', 6)
 
 
 
-
+g.getConnected()
 g.setWeight('a','b', 9)
 g.printMatrix()
