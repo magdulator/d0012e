@@ -1,4 +1,3 @@
-
 class Graph:
     def __init__(self):
         self.nodes = []     # store all the nodes in a list
@@ -53,7 +52,7 @@ class Graph:
             
      
     #O(7) + O(5n) + O(2n^2)
-    def getconnected(self): 
+    def getConnected(self): 
         connections = []                           # First in first out (list of temp connections)
         connected = [False]*self.nodeSize   # A false graph
         connections.append(0)                      # Start with the first node numbber 0
@@ -74,8 +73,9 @@ class Graph:
             print("List is connected")
         else:
             print("List is not connected")
+    
 
-            
+
 g = Graph()
 
 g.addNode('a')

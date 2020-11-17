@@ -1,3 +1,4 @@
+import random
 class Edge: 
     def __init__(self, node):
         self.node = node
@@ -21,6 +22,9 @@ class Edge:
             neighbor.edges[self] = weight
         else:
             print("Use positive weights")
+
+    
+
 
 
 class Graph:
@@ -47,29 +51,25 @@ class Graph:
         elif (v2 not in self.edgesDict):
             print(v2, "is not an existing node")
         else:
-            self.edgesDict[v1].setWeight(g.edgesDict[v2], 20)
+            self.edgesDict[v1].setWeight(self.edgesDict[v2], 20)
     
     #O(8) + O(n) + O(2n^2)
     def connectivity(self):
         nodesList = [] #All current nodes in tree
         connectedList = [] #Connected nodes in tree
         nodesList = list(self.edgesDict.keys())
-
         connectedList.append(nodesList[0])
-        if not self.edgesDict[connectedList[0]].getConnections():
-            print("The graph is not connected")
 
         for v in connectedList:     #loop through connected nodes, start at index 0
             x = self.edgesDict.get(v)
-            
             for y in x.getConnections():                #loop through nodes connections
                 if y.getNode() not in connectedList:    
                     connectedList.append(y.getNode())   #add the neighbor of node to connectedList
 
-        if len(connectedList) == len(nodesList):        #all nodes are connected
-            print("The graph is connected")
+        if len(connectedList) >= len(nodesList):        #all nodes are connected
+            return True
         else:
-            print("The graph is not connected")
+            return False
 
             
     def printGraph(self): #O(3n^2)
@@ -89,9 +89,31 @@ class Graph:
                 string = string + " Weight: " + str(x.getWeight(y)) + " -> Node: " + str(y.getNode()) + " "
             print(string)
 
+    def makeGraph(self, nodeAmount, maxWeight):
+        if nodeAmount < 2:
+           print("Need to have atleast 2 nodes")
+        else:
+            for i in range(nodeAmount+1):
+                self.addNode(str(i))
+            
+            while self.connectivity() == False:
+                n1 = self.edgesDict[str(random.randint(1, nodeAmount))]
+                n2 = self.edgesDict[str(random.randint(1, nodeAmount))]
+                if n1 != n2:
+                    if n2.getNode() not in n1.getConnections():
+                        self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
+                        
+
+                
+
+
+
 
 g = Graph()
-g.addNode('a')
+g.makeGraph(3, 1)
+g.printGraph()
+
+""" g.addNode('a')
 g.addNode('b')
 g.addNode('c')
 g.addNode('j')
@@ -104,5 +126,6 @@ g.addEdge('j', 'q', 5)
 g.setWeight('a', 'b', 20) # set new weight of a->b and b-> a
 
 g.printGraph()
-g.printNeighbors('a')
-print(g.connectivity())
+g.printNeighbors('a') """
+
+
