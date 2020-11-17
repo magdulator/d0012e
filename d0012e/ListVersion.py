@@ -48,6 +48,7 @@ class Graph:
             print(v2, "is not an existing node")
         else:
             self.edgesDict[v1].setWeight(g.edgesDict[v2], 20)
+    
     #O(8) + O(n) + O(2n^2)
     def connectivity(self):
         nodesList = [] #All current nodes in tree
@@ -56,25 +57,21 @@ class Graph:
 
         connectedList.append(nodesList[0])
         if not self.edgesDict[connectedList[0]].getConnections():
-                return False
+            print("The graph is not connected")
 
-        for v in connectedList:
+        for v in connectedList:     #loop through connected nodes, start at index 0
             x = self.edgesDict.get(v)
-            for y in x.getConnections():
-                if y.getNode() not in connectedList:
-                    connectedList.append(y.getNode())
+            
+            for y in x.getConnections():                #loop through nodes connections
+                if y.getNode() not in connectedList:    
+                    connectedList.append(y.getNode())   #add the neighbor of node to connectedList
 
-        if len(connectedList) == len(nodesList):
-            return True
+        if len(connectedList) == len(nodesList):        #all nodes are connected
+            print("The graph is connected")
         else:
-            return False    
-        
-
-
-
+            print("The graph is not connected")
 
             
-
     def printGraph(self): #O(3n^2)
         for x in self.edgesDict.values():
             for y in x.getConnections():
