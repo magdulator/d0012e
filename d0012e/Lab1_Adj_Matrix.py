@@ -7,16 +7,19 @@ class Graph:
         self.matrix = []    # the matrix with lists in lists
         
     def getGraph(self, amount, maxweight):
-        i = 0
-        while i < amount:
-            g.addNode(i)
-            i = i+1
-        while g.getConnected() == False:
-            randomnumber = random.randint(1, maxweight)
-            v1 = random.choice(self.nodes)
-            v2 = random.choice(self.nodes)
-            if (v1 != v2):
-                g.addEdge(v1, v2, randomnumber)
+        if amount < 2:
+            print("Have to be more than 1 nodes")
+        else:
+            i = 0
+            while i < amount:
+                g.addNode(i)
+                i = i+1
+            while g.getConnected() == False:
+                randomnumber = random.randint(1, maxweight)
+                v1 = random.choice(self.nodes)
+                v2 = random.choice(self.nodes)
+                if (v1 != v2):
+                    g.addEdge(v1, v2, randomnumber)
                 
                 
     #O(2n+6) 
