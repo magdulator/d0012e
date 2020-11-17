@@ -53,25 +53,27 @@ class Graph:
             
      
     #O(7) + O(5n) + O(2n^2)
-    def getConnected(self): 
-        fifo = []                           # First in first out (list of temp connections)
+    def getconnected(self): 
+        connections = []                           # First in first out (list of temp connections)
         connected = [False]*self.nodeSize   # A false graph
-        count = 0
-        fifo.append(0)                      # Start with the first node numbber 0
-        while len(fifo) > 0:                # If fifo is empty stop 
-            node = fifo[0]
-            del fifo[0]
+        connections.append(0)                      # Start with the first node numbber 0
+        i = 0
+
+        while i < len(connections):
+            print
+            node = connections[i]
+            i = i + 1
             if connected[node] == False:
-                count = count + 1
                 connected[node] = True
-                for i in range(self.nodeSize):      # place new connections in fifo
-                    if self.matrix[node][i] > 0:
-                        fifo.append(i)
-          
-        if self.nodeSize == count:                  # If the number of "nodes findid" == nodes in total true
-            print("The graph is connected")
+                print(connected)
+                for j in range(self.nodeSize):      # place new connections in fifo
+                    if self.matrix[node][j] > 0 and j not in connections:
+                        connections.append(j)
+
+        if len(connections) == self.nodeSize:
+            print("List is connected")
         else:
-            print("The graph is not connected")
+            print("List is not connected")
 
             
 g = Graph()
