@@ -1,3 +1,4 @@
+import random
 
 class Graph:
     def __init__(self):
@@ -5,7 +6,19 @@ class Graph:
         self.nodeSize = 0   # amount of nodes
         self.matrix = []    # the matrix with lists in lists
         
-
+    def getGraph(self, amount, maxweight):
+        i = 0
+        while i < amount:
+            g.addNode(i)
+            i = i+1
+        while g.getConnected() == False:
+            randomnumber = random.randint(1, maxweight)
+            v1 = random.choice(self.nodes)
+            v2 = random.choice(self.nodes)
+            if (v1 != v2):
+                g.addEdge(v1, v2, randomnumber)
+                
+                
     #O(2n+6) 
     def addNode(self, node):
         if node in self.nodes:                  # Cancels nodes that are similar
@@ -51,48 +64,35 @@ class Graph:
         for i in range(self.nodeSize):
             print(self.nodes[i], self.matrix[i])
             
-     
+    import random
+    
     #O(7) + O(5n) + O(2n^2)
-    def getconnected(self): 
+    def getConnected(self): 
         connections = []                           # First in first out (list of temp connections)
         connected = [False]*self.nodeSize   # A false graph
         connections.append(0)                      # Start with the first node numbber 0
         i = 0
-
         while i < len(connections):
-            print
             node = connections[i]
             i = i + 1
             if connected[node] == False:
                 connected[node] = True
-                print(connected)
                 for j in range(self.nodeSize):      # place new connections in fifo
                     if self.matrix[node][j] > 0 and j not in connections:
                         connections.append(j)
 
         if len(connections) == self.nodeSize:
-            print("List is connected")
+            return True
         else:
-            print("List is not connected")
+            return False
 
             
 g = Graph()
 
-g.addNode('a')
-g.addNode('b')  
-g.addNode('c')
-g.addNode('d')
-g.addNode('e')
-
-g.addEdge('a', 'b', 1)  
-g.addEdge('a', 'c', 2)
-g.addEdge('b', 'c', 3)
-g.addEdge('a', 'd', 5)
-g.addEdge('c', 'b', 4)
-g.addEdge('e', 'd', 6)
 
 
 
+g.getGraph(10,9)
 g.getConnected()
-g.setWeight('a','b', 9)
+g.setWeight(1, 2, 9)
 g.printMatrix()
