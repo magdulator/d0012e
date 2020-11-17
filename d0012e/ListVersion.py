@@ -48,7 +48,7 @@ class Graph:
             print(v2, "is not an existing node")
         else:
             self.edgesDict[v1].setWeight(g.edgesDict[v2], 20)
-
+    #O(8) + O(n) + O(2n^2)
     def connectivity(self):
         nodesList = [] #All current nodes in tree
         connectedList = [] #Connected nodes in tree
