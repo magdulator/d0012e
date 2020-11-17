@@ -52,6 +52,7 @@ class Graph:
             print(self.nodes[i], self.matrix[i])
             
      
+    #O(7) + O(5n) + O(2n^2)
     def getConnected(self): 
         fifo = []                           # First in first out (list of temp connections)
         connected = [False]*self.nodeSize   # A false graph
