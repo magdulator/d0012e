@@ -67,8 +67,29 @@ class Graph:
         for i in range(self.nodeSize):
             print(self.nodes[i], self.matrix[i])
             
-    import random
-    
+            
+        #0(n^3)
+    def primAlgo(self):
+        visited = []                    # Visited nodes
+        minsum = 0                      # The minimal tree
+        visited.append(0)               # Starting index
+        best = 0
+        
+        while range(len(visited)) != range(self.nodeSize):          # Go until all nodes is visited
+            minnumber = self.maxweight + 1
+            for i in visited:                                       # Looks at visited nodes
+                for j in range(self.nodeSize):
+                    if self.matrix[i][j] > 0:
+                        number = self.matrix[i][j]
+                        if minnumber > number and j not in visited: # Choose the best (lowest weight) 
+                            minnumber = number
+                            best = j
+                            
+            visited.append(best)                                    # Add the new node to visited
+            minsum = minsum + minnumber                             # Add the wheigt
+        print(minsum)
+        
+        
     #O(7) + O(5n) + O(2n^2)
     def getConnected(self): 
         connections = []                           # First in first out (list of temp connections)
@@ -98,3 +119,4 @@ g.getGraph(10,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
 g.printMatrix()
+g.primAlgo()
