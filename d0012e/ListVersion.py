@@ -31,14 +31,25 @@ class Edge:
 
 
 class Graph:
+
+    ###########################################################################
+    # Constructor
     def __init__(self):
         self.edgesDict = {} # list with Edge objects
 
+
+    ###########################################################################
+    # Makes an "Edge" which is two nodes(v1 and v2) connected and the connection has a weight
+    # cost: O(c) 
     def addNode(self, node): # O(3)
         newNode = Edge(node)
         self.edgesDict[node] = newNode  #key: 'a', value: Edge object {'a': {'c':1, 'd':1}, 'c':{'a':1}, 'd':{'a':1}}
         return newNode
 
+
+    ###########################################################################
+    # Makes an "Edge" which is two nodes(v1 and v2) connected and the connection has a weight
+    # cost: O(c) 
     def addEdge(self, v1, v2, weight): # O(5) + O(1) + O(1)
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
@@ -47,10 +58,19 @@ class Graph:
         else:
             self.edgesDict[v1].addConnection(self.edgesDict[v2], weight)    #two way connection
             self.edgesDict[v2].addConnection(self.edgesDict[v1], weight)
-    
+
+
+    ###########################################################################
+    # Returns the "edge" object which is the node which contains connections and 
+    # weights for connections
+    # cost: O(c)  
     def getNode(self, v1):
         return self.edgesDict[v1].getNode()
-    
+
+
+    ###########################################################################
+    # sets a weight for nodes v1 and v2
+    # cost: O(c) 
     def setWeight(self, v1, v2, weight):
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
@@ -59,7 +79,11 @@ class Graph:
         else:
             self.edgesDict[v1].setWeight(self.edgesDict[v2], 20)
     
-    #O(8) + O(n) + O(2n^2)
+    ###########################################################################
+    # Check is graph is connected. Checks one node if its connected with any nodes
+    # and does it for every connected node. If the amount of nodes found are equal
+    # to exisitng nodes the tree has connectivity
+    # cost: O(n^2)
     def connectivity(self):
         nodesList = [] #All current nodes in tree
         connectedList = [] #Connected nodes in tree
@@ -76,14 +100,21 @@ class Graph:
         else:
             return False
 
-            
-    def printGraph(self): #O(3n^2)
+
+    ###########################################################################
+    # Prints All edges both ways in the graph
+    # cost: O(n^2)       
+    def printGraph(self):
         for x in self.edgesDict.values():
             for y in x.getConnections():
                 v1 = x.getNode()
                 v2 = y.getNode()
                 print(v1, v2, x.getWeight(y))
 
+
+    ###########################################################################
+    # Prints the connected nodes and weights to the node V
+    # cost: O(n)
     def printNeighbors(self, v): #O(n+4)
         if (v not in self.edgesDict):
             print(v + "is not an exisitng node")
@@ -94,6 +125,10 @@ class Graph:
                 string = string + " Weight: " + str(x.getWeight(y)) + " -> Node: " + str(y.getNode()) + " "
             print(string)
 
+
+    ###########################################################################
+    # Adds nodeAmount of nodes and edges to the nodes to create a connected tree
+    # cost: O(n^2)
     def makeGraph(self, nodeAmount, maxWeight):
         if nodeAmount < 2:
            print("Need to have atleast 2 nodes")
@@ -107,6 +142,10 @@ class Graph:
                 if n1 != n2 and n2.getNode() not in n1.getConnections():
                     self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
+
+    ###########################################################################
+    # skriv en generell förklaring av prims algoritm tack :)
+    # cost: O(n^3)                
     def primAlgo(self, startNode):
         visited = [startNode]   #add all visited nodes to list 
         totalCost = 0
