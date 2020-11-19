@@ -106,7 +106,7 @@ class Graph:
                     if n2.getNode() not in n1.getConnections():
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
-    def letgo(self, startNode):
+    def primAlgo(self, startNode):
         visited = [startNode]
         totalCost = 0
         i=0
@@ -128,7 +128,6 @@ class Graph:
 
 
 g = Graph()
-#g.makeGraph(3, 1)
 
 g.addNode('a')
 g.addNode('b')
@@ -147,7 +146,7 @@ g.addEdge('f', 'g', 9)
 
 #g.printGraph()
 
-g.letgo('a')
+g.primAlgo('a')
 
 
 """ g.addNode('a')
