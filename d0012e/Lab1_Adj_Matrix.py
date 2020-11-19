@@ -5,6 +5,7 @@ class Graph:
         self.nodes = []     # store all the nodes in a list
         self.nodeSize = 0   # amount of nodes
         self.matrix = []    # the matrix with lists in lists
+        self.maxweight = 0
         
     def getGraph(self, amount, maxweight):
         self.maxweight = maxweight
