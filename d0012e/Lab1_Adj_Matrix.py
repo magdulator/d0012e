@@ -8,7 +8,6 @@ class Graph:
         self.maxweight = 0
         
     def getGraph(self, amount, maxweight):
-        self.maxweight = maxweight
         if amount < 2:
             print("Have to be more than 1 nodes")
         else:
@@ -78,15 +77,16 @@ class Graph:
         best = 0
         
         while range(len(visited)) != range(self.nodeSize):          # Go until all nodes is visited
-            minnumber = self.maxweight + 1
+            minnumber = -1
             for i in visited:                                       # Looks at visited nodes
                 for j in range(self.nodeSize):
-                    if self.matrix[i][j] > 0:
+                    if self.matrix[i][j] > 0 and j not in visited:
                         number = self.matrix[i][j]
-                        if minnumber > number and j not in visited: # Choose the best (lowest weight) 
+                        if minnumber > number or minnumber == -1:   # Choose the best (lowest weight) 
                             minnumber = number
                             best = j
-                            
+            print(visited)                
+            print(minnumber)                
             visited.append(best)                                    # Add the new node to visited
             minsum = minsum + minnumber                             # Add the wheigt
         print(minsum)
@@ -117,7 +117,7 @@ g = Graph()
 
 
 
-g.getGraph(10,9)
+g.getGraph(5,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
 g.printMatrix()
