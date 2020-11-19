@@ -107,24 +107,24 @@ class Graph:
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
     def primAlgo(self, startNode):
-        visited = [startNode]
+        visited = [startNode]   #add all visited nodes to list 
         totalCost = 0
         i=0
-        while i < len(visited):
+        while i < len(visited): 
 
-            for key in visited:
-                neighbours = self.edgesDict.get(key).getNeigbours().items() 
+            for key in visited: # looks att all nodes that has been visited for smallest edge
+                neighbours = self.edgesDict.get(key).getNeigbours().items()  # {objekt: weight}
                 minWeight = -1
-                for neighbour in neighbours:
-                    if neighbour[0].getNode() not in visited:
-                        if neighbour[1] < minWeight or minWeight == -1:
+                for neighbour in neighbours:   
+                    if neighbour[0].getNode() not in visited:   #index 0 = object holding node, index 1 = weight
+                        if neighbour[1] < minWeight or minWeight == -1: #looks at all the neighbour weights for node to get minimum weight
                             totalCost += neighbour[1]
                             minWeight = neighbour[1]
-                            chosenNode = neighbour[0].getNode()
+                            chosenNode = neighbour[0].getNode() 
                             visited.append(chosenNode)
             print((visited[i]) + " -> ")
             i+=1
-        print(totalCost)
+        print("Total weight: " + str(totalCost))
 
 
 g = Graph()
