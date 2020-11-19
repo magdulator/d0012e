@@ -7,6 +7,7 @@ class Graph:
         self.matrix = []    # the matrix with lists in lists
         
     def getGraph(self, amount, maxweight):
+        self.maxweight = maxweight
         if amount < 2:
             print("Have to be more than 1 nodes")
         else:
