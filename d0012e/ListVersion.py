@@ -10,6 +10,9 @@ class Edge:
     def getConnections(self): #O(1)
         return self.edges.keys()
 
+    def getNeigbours(self):
+        return self.edges
+
     def getNode(self): # O(1)
         return self.node
 
@@ -102,16 +105,50 @@ class Graph:
                 if n1 != n2:
                     if n2.getNode() not in n1.getConnections():
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
-                        
 
-                
+    def letgo(self, startNode):
+        visited = [startNode]
+        totalCost = 0
+        i=0
+        while i < len(visited):
 
-
+            for key in visited:
+                neighbours = self.edgesDict.get(key).getNeigbours().items() 
+                minWeight = -1
+                for neighbour in neighbours:
+                    if neighbour[0].getNode() not in visited:
+                        if neighbour[1] < minWeight or minWeight == -1:
+                            totalCost += neighbour[1]
+                            minWeight = neighbour[1]
+                            chosenNode = neighbour[0].getNode()
+                            visited.append(chosenNode)
+            print((visited[i]) + " -> ")
+            i+=1
+        print(totalCost)
 
 
 g = Graph()
-g.makeGraph(3, 1)
-g.printGraph()
+#g.makeGraph(3, 1)
+
+g.addNode('a')
+g.addNode('b')
+g.addNode('c')
+g.addNode('d')
+g.addNode('e')
+g.addNode('f')
+g.addNode('g')
+
+g.addEdge('a', 'b', 2)  
+g.addEdge('a', 'c', 3)
+g.addEdge('a', 'd', 3)
+g.addEdge('c', 'e', 1)
+g.addEdge('c', 'f', 6)
+g.addEdge('f', 'g', 9)
+
+#g.printGraph()
+
+g.letgo('a')
+
 
 """ g.addNode('a')
 g.addNode('b')
