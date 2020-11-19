@@ -12,14 +12,14 @@ class Graph:
         else:
             i = 0
             while i < amount:
-                g.addNode(i)
+                self.addNode(i)
                 i = i+1
-            while g.getConnected() == False:
+            while self.getConnected() == False:
                 randomnumber = random.randint(1, maxweight)
                 v1 = random.choice(self.nodes)
                 v2 = random.choice(self.nodes)
                 if (v1 != v2):
-                    g.addEdge(v1, v2, randomnumber)
+                    self.addEdge(v1, v2, randomnumber)
                 
                 
     #O(2n+6) 
@@ -62,17 +62,15 @@ class Graph:
             
 
     #O(n+1)            
-    def printMatrix(self):                      #print the matrix
+    def printMatrix(self):                         #print the matrix
         print(self.nodes)
         for i in range(self.nodeSize):
             print(self.nodes[i], self.matrix[i])
             
-    import random
-    
     #O(7) + O(5n) + O(2n^2)
     def getConnected(self): 
         connections = []                           # First in first out (list of temp connections)
-        connected = [False]*self.nodeSize   # A false graph
+        connected = [False]*self.nodeSize          # A false graph
         connections.append(0)                      # Start with the first node numbber 0
         i = 0
         while i < len(connections):

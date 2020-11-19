@@ -47,7 +47,10 @@ class Graph:
         else:
             self.edgesDict[v1].addConnection(self.edgesDict[v2], weight)    #two way connection
             self.edgesDict[v2].addConnection(self.edgesDict[v1], weight)
-
+    
+    def getNode(self, v1):
+        return self.edgesDict[v1].getNode()
+    
     def setWeight(self, v1, v2, weight):
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
@@ -68,7 +71,6 @@ class Graph:
             for y in x.getConnections():                #loop through nodes connections
                 if y.getNode() not in connectedList:    
                     connectedList.append(y.getNode())   #add the neighbor of node to connectedList
-
         if len(connectedList) >= len(nodesList):        #all nodes are connected
             return True
         else:
@@ -96,15 +98,14 @@ class Graph:
         if nodeAmount < 2:
            print("Need to have atleast 2 nodes")
         else:
-            for i in range(nodeAmount+1):
+            for i in range(nodeAmount):
                 self.addNode(str(i))
             
             while self.connectivity() == False:
-                n1 = self.edgesDict[str(random.randint(1, nodeAmount))]
-                n2 = self.edgesDict[str(random.randint(1, nodeAmount))]
-                if n1 != n2:
-                    if n2.getNode() not in n1.getConnections():
-                        self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
+                n1 = self.edgesDict[str(random.randint(0, nodeAmount-1))]
+                n2 = self.edgesDict[str(random.randint(0, nodeAmount-1))]
+                if n1 != n2 and n2.getNode() not in n1.getConnections():
+                    self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
     def primAlgo(self, startNode):
         visited = [startNode]
@@ -128,8 +129,11 @@ class Graph:
 
 
 g = Graph()
+g.makeGraph(5, 3)
+g.printGraph()
 
-g.addNode('a')
+
+""" g.addNode('a')
 g.addNode('b')
 g.addNode('c')
 g.addNode('d')
@@ -143,10 +147,9 @@ g.addEdge('a', 'd', 3)
 g.addEdge('c', 'e', 1)
 g.addEdge('c', 'f', 6)
 g.addEdge('f', 'g', 9)
+ """
 
-#g.printGraph()
-
-g.primAlgo('a')
+#g.primAlgo('a')
 
 
 """ g.addNode('a')
