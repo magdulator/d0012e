@@ -103,7 +103,9 @@ class Graph:
                 if self.matrix[i][j] > 0:
                     h.insert(self.matrix[i][j], [i, j])
 
-        while visited != [True]*self.nodeSize:                          # Keep going as long as something is in the list
+        h.print()
+
+        while visited != [True]*self.nodeSize:
             n1 = h.Edgelist[k][0]                       # The two nodes connected to the edge
             n2 = h.Edgelist[k][1]
             print(h.Edgelist)
@@ -111,22 +113,25 @@ class Graph:
         
             if visited == [False]*self.nodeSize:            # First choise when all nodes are unvisited
                 visited[n1] = True
-
             if visited[n1] == True and visited[n2] == True: # Dont use two visited nodes 
                 del h.Edgelist[k]
                 del h.heap[k]
                 k = 0                
-            if visited[n1] == False and visited[n2] == False :  # Dont use two unvisited nodes and instead look att the next object
-                k = k+1
-            if visited[n1] == True and visited[n2] == False or visited[n1] == False and visited[n2] == True:    # Use if just one of the nodes are visited
-                minsum = minsum + h.heap[k]                                                                     # Adds the weight
-                visited[n1] = True                                                                              # Set the nodes as visited
+            elif (visited[n1] == True and visited[n2] == False) or (visited[n1] == False and visited[n2] == True):    # Use if just one of the nodes are visited
+                minsum = minsum + h.heap[k]                                                                             # Adds the weight
+                visited[n1] = True                                                                                   # Set the nodes as visited
                 visited[n2] = True
-                del h.Edgelist[k]                                                                               # Delete this edge and weight connected to the edge
+                del h.Edgelist[k]                                                                                        # Delete this edge and weight connected to the edge
                 del h.heap[k]
-                k = 0                                                                                           # Start from the start of the heaplist
+                k = 0
+            else:                                                                                                       # Dont use two unvisited nodes and instead look att the next object
+                k = k+1
+
+
+                # Start from the start of the heaplist
                 
         print("Minimal weight is:", minsum)
+
                 
                 
         

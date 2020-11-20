@@ -24,7 +24,7 @@ class Heap:
         newValue = self.heap[index]
         newEdge = self.Edgelist[index]
 
-        while (index < 0 and newValue < self.heap[self.getParent(index)]):
+        while (index > 0 and newValue < self.heap[self.getParent(index)]):
             parentIndex = self.getParent(index)
             self.heap[index] = self.heap[parentIndex]
             self.Edgelist[index] = self.Edgelist[parentIndex]
