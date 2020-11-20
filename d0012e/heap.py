@@ -22,7 +22,7 @@ class Heap:
     # cost: O(n)
     def fixHeap(self, index):
         newValue = self.heap[index]
-        newEdge = self.heap[index]
+        newEdge = self.Edgelist[index]
 
         while (index > 0 and newValue > self.heap[self.getParent(index)]):
             parentIndex = self.getParent(index)
@@ -46,15 +46,13 @@ class Heap:
     
 
 
-""" 
+
 lst = [2, 3, 1]
 lst2 = ['a', 'b', 'c']
 
-h = Heap(3)
+h = Heap()
 
 for i in range(3):
     h.insert(lst[i], lst2[i])
-    print(lst[i], lst2[i])
 
-print(h.printHeap())
- """
+print(h.print())
