@@ -1,24 +1,20 @@
 class Heap:
     ################################################################
     # Heap constructor
-    def __init__(self, capacity):
+    def __init__(self):
         self.heap = []            #Heap List
         self.Edgelist = []        #List of corresponding edges
         self.currentSize = 0      #Current size of heap list
-        self.capacity = capacity  #Max Capacity of the heap list
 
     
     ################################################################
     # Inserts weight and corresponding edge
     # cost: O(c)
     def insert(self, weight, edge):
-        if self.isFull():
-            print("Heap is full")
-        else:
-            self.heap.append(weight)
-            self.Edgelist.append(edge)
-            self.fixHeap(self.currentSize)
-            self.currentSize += 1
+        self.heap.append(weight)
+        self.Edgelist.append(edge)
+        self.fixHeap(self.currentSize)
+        self.currentSize += 1
 
 
     ################################################################
@@ -36,13 +32,6 @@ class Heap:
         
         self.heap[index] = newValue
         self.Edgelist[index] = newEdge
-
-
-    ################################################################
-    # Checks if heap is full returns true if true
-    # cost: O(c)
-    def isFull(self): 
-        return self.currentSize == self.capacity
     
 
     ################################################################
@@ -51,7 +40,7 @@ class Heap:
     def getParent(self, index):
         return int((index-1)/2)
 
-    def printHeap(self):
+    def print(self):
         for i in range(self.currentSize):
             print (self.heap[i], self.Edgelist[i])
     
