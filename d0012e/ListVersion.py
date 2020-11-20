@@ -1,4 +1,6 @@
 import random
+import heap
+
 class Edge: 
     def __init__(self, node):
         self.node = node
@@ -50,7 +52,7 @@ class Graph:
     ###########################################################################
     # Makes an "Edge" which is two nodes(v1 and v2) connected and the connection has a weight
     # cost: O(c) 
-    def addEdge(self, v1, v2, weight): # O(5) + O(1) + O(1)
+    def addEdge(self, v1, v2, weight): 
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
         elif (v2 not in self.edgesDict):
