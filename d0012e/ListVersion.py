@@ -1,5 +1,5 @@
 import random
-import heap
+from heap import Heap
 
 class Edge: 
     def __init__(self, node):
@@ -173,6 +173,7 @@ g = Graph()
 g.makeGraph(5, 3)
 g.printGraph()
 
+h = Heap(3)
 
 """ g.addNode('a')
 g.addNode('b')
