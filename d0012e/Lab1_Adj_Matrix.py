@@ -1,4 +1,5 @@
 import random
+from heap import Heap
 
 class Graph:
     def __init__(self):
@@ -90,6 +91,18 @@ class Graph:
             visited.append(best)                                    # Add the new node to visited
             minsum = minsum + minnumber                             # Add the wheigt
         print(minsum)
+
+
+
+    def primAlgoHeap(self):
+        Heapvalue = []
+        position = []
+
+        for i in range(self.nodeSize):
+            for j in range(self.nodeSize):
+                heap.insert(heap, self.matrix[i][j])
+
+                print(heap.self.heap)
         
         
     #O(7) + O(5n) + O(2n^2)
@@ -113,7 +126,10 @@ class Graph:
             return False
 
 g = Graph()
-g = Graph()
+h = Heap(25)
+
+
+
 g.getGraph(5,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
