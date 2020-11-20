@@ -85,25 +85,50 @@ class Graph:
                         number = self.matrix[i][j]
                         if minnumber > number or minnumber == -1:   # Choose the best (lowest weight) 
                             minnumber = number
-                            best = j
-            print(visited)                
-            print(minnumber)                
+                            best = j               
             visited.append(best)                                    # Add the new node to visited
             minsum = minsum + minnumber                             # Add the wheigt
-        print(minsum)
+        print("The minimum", minsum)
 
 
 
     def primAlgoHeap(self):
-        Heapvalue = []
-        position = []
+        h = Heap()
+        visited = [False]*self.nodeSize
+        k = 0
+        minsum = 0
 
-        for i in range(self.nodeSize):
+        for i in range(self.nodeSize):                  # This just adds all the nodes from the matrix to the heap list
             for j in range(self.nodeSize):
-                heap.insert(heap, self.matrix[i][j])
+                if self.matrix[i][j] > 0:
+                    h.insert(self.matrix[i][j], [i, j])
 
-                print(heap.self.heap)
+        while visited != [True]*self.nodeSize:                          # Keep going as long as something is in the list
+            n1 = h.Edgelist[k][0]                       # The two nodes connected to the edge
+            n2 = h.Edgelist[k][1]
+            print(h.Edgelist)
+            print(h.heap)
         
+            if visited == [False]*self.nodeSize:            # First choise when all nodes are unvisited
+                visited[n1] = True
+
+            if visited[n1] == True and visited[n2] == True: # Dont use two visited nodes 
+                del h.Edgelist[k]
+                del h.heap[k]
+                k = 0                
+            if visited[n1] == False and visited[n2] == False :  # Dont use two unvisited nodes and instead look att the next object
+                k = k+1
+            if visited[n1] == True and visited[n2] == False or visited[n1] == False and visited[n2] == True:    # Use if just one of the nodes are visited
+                minsum = minsum + h.heap[k]                                                                     # Adds the weight
+                visited[n1] = True                                                                              # Set the nodes as visited
+                visited[n2] = True
+                del h.Edgelist[k]                                                                               # Delete this edge and weight connected to the edge
+                del h.heap[k]
+                k = 0                                                                                           # Start from the start of the heaplist
+                
+        print("Minimal weight is:", minsum)
+                
+                
         
     #O(7) + O(5n) + O(2n^2)
     def getConnected(self): 
@@ -120,13 +145,13 @@ class Graph:
                     if self.matrix[node][j] > 0 and j not in connections:
                         connections.append(j)
 
+
         if len(connections) == self.nodeSize:
             return True
         else:
             return False
 
 g = Graph()
-h = Heap(25)
 
 
 
@@ -135,3 +160,4 @@ g.getConnected()
 g.setWeight(1, 2, 9)
 g.printMatrix()
 g.primAlgo()
+g.primAlgoHeap()

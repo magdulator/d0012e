@@ -24,7 +24,7 @@ class Heap:
         newValue = self.heap[index]
         newEdge = self.Edgelist[index]
 
-        while (index > 0 and newValue < self.heap[self.getParent(index)]):
+        while (index < 0 and newValue < self.heap[self.getParent(index)]):
             parentIndex = self.getParent(index)
             self.heap[index] = self.heap[parentIndex]
             self.Edgelist[index] = self.Edgelist[parentIndex]
@@ -43,16 +43,5 @@ class Heap:
     def print(self):
         for i in range(self.currentSize):
             print (self.heap[i], self.Edgelist[i])
-    
-
-
-
-lst = [2, 3, 1]
-lst2 = ['a', 'b', 'c']
 
 h = Heap()
-
-for i in range(3):
-    h.insert(lst[i], lst2[i])
-
-print(h.print())
