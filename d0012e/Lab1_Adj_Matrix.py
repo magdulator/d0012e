@@ -113,10 +113,7 @@ class Graph:
             return False
 
 g = Graph()
-
-
-
-
+g = Graph()
 g.getGraph(5,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
