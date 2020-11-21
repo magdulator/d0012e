@@ -1,6 +1,5 @@
 import random
 from heap import Heap
-
 class Edge: 
     def __init__(self, node):
         self.node = node
@@ -33,26 +32,15 @@ class Edge:
 
 
 class Graph:
-
-    ###########################################################################
-    # Constructor
     def __init__(self):
         self.edgesDict = {} # list with Edge objects
 
-
-    ###########################################################################
-    # Makes an "Edge" which is two nodes(v1 and v2) connected and the connection has a weight
-    # cost: O(c) 
     def addNode(self, node): # O(3)
         newNode = Edge(node)
         self.edgesDict[node] = newNode  #key: 'a', value: Edge object {'a': {'c':1, 'd':1}, 'c':{'a':1}, 'd':{'a':1}}
         return newNode
 
-
-    ###########################################################################
-    # Makes an "Edge" which is two nodes(v1 and v2) connected and the connection has a weight
-    # cost: O(c) 
-    def addEdge(self, v1, v2, weight): 
+    def addEdge(self, v1, v2, weight): # O(5) + O(1) + O(1)
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
         elif (v2 not in self.edgesDict):
@@ -61,18 +49,6 @@ class Graph:
             self.edgesDict[v1].addConnection(self.edgesDict[v2], weight)    #two way connection
             self.edgesDict[v2].addConnection(self.edgesDict[v1], weight)
 
-
-    ###########################################################################
-    # Returns the "edge" object which is the node which contains connections and 
-    # weights for connections
-    # cost: O(c)  
-    def getNode(self, v1):
-        return self.edgesDict[v1].getNode()
-
-
-    ###########################################################################
-    # sets a weight for nodes v1 and v2
-    # cost: O(c) 
     def setWeight(self, v1, v2, weight):
         if (v1 not in self.edgesDict):
             print(v1, "is not an existing node")
@@ -81,11 +57,7 @@ class Graph:
         else:
             self.edgesDict[v1].setWeight(self.edgesDict[v2], 20)
     
-    ###########################################################################
-    # Check is graph is connected. Checks one node if its connected with any nodes
-    # and does it for every connected node. If the amount of nodes found are equal
-    # to exisitng nodes the tree has connectivity
-    # cost: O(n^2)
+    #O(8) + O(n) + O(2n^2)
     def connectivity(self):
         nodesList = [] #All current nodes in tree
         connectedList = [] #Connected nodes in tree
@@ -97,26 +69,20 @@ class Graph:
             for y in x.getConnections():                #loop through nodes connections
                 if y.getNode() not in connectedList:    
                     connectedList.append(y.getNode())   #add the neighbor of node to connectedList
+
         if len(connectedList) >= len(nodesList):        #all nodes are connected
             return True
         else:
             return False
 
-
-    ###########################################################################
-    # Prints All edges both ways in the graph
-    # cost: O(n^2)       
-    def printGraph(self):
+            
+    def printGraph(self): #O(3n^2)
         for x in self.edgesDict.values():
             for y in x.getConnections():
                 v1 = x.getNode()
                 v2 = y.getNode()
                 print(v1, v2, x.getWeight(y))
 
-
-    ###########################################################################
-    # Prints the connected nodes and weights to the node V
-    # cost: O(n)
     def printNeighbors(self, v): #O(n+4)
         if (v not in self.edgesDict):
             print(v + "is not an exisitng node")
@@ -127,27 +93,20 @@ class Graph:
                 string = string + " Weight: " + str(x.getWeight(y)) + " -> Node: " + str(y.getNode()) + " "
             print(string)
 
-
-    ###########################################################################
-    # Adds nodeAmount of nodes and edges to the nodes to create a connected tree
-    # cost: O(n^2)
     def makeGraph(self, nodeAmount, maxWeight):
         if nodeAmount < 2:
            print("Need to have atleast 2 nodes")
         else:
-            for i in range(nodeAmount):
+            for i in range(nodeAmount+1):
                 self.addNode(str(i))
             
             while self.connectivity() == False:
-                n1 = self.edgesDict[str(random.randint(0, nodeAmount-1))]
-                n2 = self.edgesDict[str(random.randint(0, nodeAmount-1))]
-                if n1 != n2 and n2.getNode() not in n1.getConnections():
-                    self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
+                n1 = self.edgesDict[str(random.randint(1, nodeAmount))]
+                n2 = self.edgesDict[str(random.randint(1, nodeAmount))]
+                if n1 != n2:
+                    if n2.getNode() not in n1.getConnections():
+                        self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
-
-    ###########################################################################
-    # skriv en generell förklaring av prims algoritm tack :)
-    # cost: O(n^3)                
     def primAlgo(self, startNode):
         visited = [startNode]   #add all visited nodes to list 
         totalCost = 0
@@ -159,39 +118,73 @@ class Graph:
                 minWeight = -1
                 for neighbour in neighbours:   
                     if neighbour[0].getNode() not in visited:   #index 0 = object holding node, index 1 = weight
-                        if neighbour[1] < minWeight or minWeight == -1: #looks at all the neighbour weights for node to get minimum weight
-                            totalCost += neighbour[1]
+                        if neighbour[1] < minWeight or minWeight == -1: #looks at all the neighbour weights for node to get minimum
                             minWeight = neighbour[1]
                             chosenNode = neighbour[0].getNode() 
                             visited.append(chosenNode)
+                if(minWeight!= -1):
+                    print (minWeight)
+                    totalCost += minWeight
             print((visited[i]) + " -> ")
+
             i+=1
-        print("Total weight: " + str(totalCost))
+        print("Total weight without heap: " + str(totalCost) + " TAKES WRONG PATH \n")
+
+    def primHeap(self):
+        minHeap = Heap()
+        size = len(self.edgesDict)
+        parents = []
+        visited = [False]*size
+
+        for v in range(size):
+            parents.append(-1)      #parents start at [-1, -1, -1], first node will not have parent, represented by -1
+            minHeap.insert(v, 1000) #all but first keys start att 1000, EdgeList = [0, 1000, 1000], v is the nodes
+        minHeap.Edgelist[0] = 0
+        i=0
+        while len(minHeap.heap) > i:    #for all nodes
+            visited[i] = True   
+
+            smallestEdgeNode = minHeap.heap[i] #gets smallest node, should get smallest key that has not been visited i guess, now you must start at node 0
+
+            neighbours = self.edgesDict.get(str(smallestEdgeNode)).getNeigbours().items()# {objekt: weight} 
+
+            for neighbour in neighbours:
+                neighbourNode = neighbour[0].getNode()
+                neighbourIndex = minHeap.heap.index(int(neighbourNode))
+                if neighbour[1] < minHeap.Edgelist[neighbourIndex] and visited[neighbourIndex] != True: # look if weight to neighbour is smaller than its key 
+                    minHeap.Edgelist[neighbourIndex] = neighbour[1] #update neighbours key with new weight
+                    parents[neighbourIndex] = minHeap.heap[i]       #set node to be neighbours parent             
+            i+=1
+        print("Parents for node: " , parents)
+        print("Key values for node: " , minHeap.Edgelist)  
+        print("Node is visited: " , visited) 
+
+        totalWeight=0
+        for i in minHeap.Edgelist:
+            totalWeight +=i 
+        print("total weight: " , totalWeight , ", correct:(function without heap is wrong)")
 
 
 g = Graph()
-g.makeGraph(5, 3)
-g.printGraph()
 
-h = Heap(3)
+g.addNode('0')
+g.addNode('1')
+g.addNode('2')
+g.addNode('3')
+g.addNode('4')
 
-""" g.addNode('a')
-g.addNode('b')
-g.addNode('c')
-g.addNode('d')
-g.addNode('e')
-g.addNode('f')
-g.addNode('g')
 
-g.addEdge('a', 'b', 2)  
-g.addEdge('a', 'c', 3)
-g.addEdge('a', 'd', 3)
-g.addEdge('c', 'e', 1)
-g.addEdge('c', 'f', 6)
-g.addEdge('f', 'g', 9)
- """
+g.addEdge('0', '1', 2)  
+g.addEdge('0', '2', 3)
+g.addEdge('1', '3', 3)
+g.addEdge('2', '4', 1)
+g.addEdge('2', '3', 6)
+g.addEdge('1', '4', 9)
 
-#g.primAlgo('a')
+#g.printGraph()
+
+g.primAlgo('0')
+g.primHeap()
 
 
 """ g.addNode('a')
