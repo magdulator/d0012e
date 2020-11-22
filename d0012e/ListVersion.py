@@ -1,4 +1,5 @@
 import random
+import time
 from heap import Heap
 class Edge: 
     def __init__(self, node):
@@ -101,13 +102,14 @@ class Graph:
                 self.addNode(str(i))
             
             while self.connectivity() == False:
-                n1 = self.edgesDict[str(random.randint(1, nodeAmount))]
-                n2 = self.edgesDict[str(random.randint(1, nodeAmount))]
+                n1 = self.edgesDict[str(random.randint(0, nodeAmount))]
+                n2 = self.edgesDict[str(random.randint(0, nodeAmount))]
                 if n1 != n2:
                     if n2.getNode() not in n1.getConnections():
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
     def primAlgo(self, startNode):
+        start_time = time.time()
         visited = [startNode]   #add all visited nodes to list 
         totalCost = 0
         i=0
@@ -129,8 +131,10 @@ class Graph:
 
             i+=1
         print("Total weight without heap: " + str(totalCost) + " TAKES WRONG PATH \n")
+        print ("Time for prim without heap: ", time.time() - start_time)
 
     def primAlgoHeap(self):
+        start_time = time.time()
         minHeap = Heap()
         size = len(self.edgesDict)
         
@@ -152,25 +156,14 @@ class Graph:
                             
             minHeap.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
         print("minimum weight is:", minHeap.minsum)
+        print ("Time for prim with heap: ", time.time() - start_time)
 
 
 g = Graph()
 
-g.addNode('0')
-g.addNode('1')
-g.addNode('2')
-g.addNode('3')
-g.addNode('4')
+g.makeGraph(100, 10)
 
-
-g.addEdge('0', '1', 2)  
-g.addEdge('0', '2', 3)
-g.addEdge('1', '3', 3)
-g.addEdge('2', '4', 1)
-g.addEdge('2', '3', 6)
-g.addEdge('1', '4', 9)
-
-#g.printGraph()
+g.printGraph()
 
 g.primAlgo('0')
 #g.primHeap()
