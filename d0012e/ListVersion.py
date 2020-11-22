@@ -130,42 +130,6 @@ class Graph:
             i+=1
         print("Total weight without heap: " + str(totalCost) + " TAKES WRONG PATH \n")
 
-    def primHeap(self):
-        minHeap = Heap()
-        size = len(self.edgesDict)
-        parents = []
-        visited = [False]*size
-
-        for v in range(size):
-            parents.append(-1)      #parents start at [-1, -1, -1], first node will not have parent, represented by -1
-            minHeap.insert(v, 1000) #all but first keys start att 1000, EdgeList = [0, 1000, 1000], v is the nodes
-        minHeap.Edgelist[0] = 0
-        i=0
-        while len(minHeap.heap) > i:    #for all nodes
-
-            visited[i] = True   
-
-            smallestEdgeNode = minHeap.heap[i] #gets smallest node, should get smallest key that has not been visited i guess, now you must start at node 0
-
-            neighbours = self.edgesDict.get(str(smallestEdgeNode)).getNeigbours().items()# {objekt: weight} 
-
-            for neighbour in neighbours:
-                neighbourNode = neighbour[0].getNode()
-                neighbourIndex = minHeap.heap.index(int(neighbourNode))
-                if neighbour[1] < minHeap.Edgelist[neighbourIndex] and visited[neighbourIndex] != True: # look if weight to neighbour is smaller than its key 
-                    minHeap.Edgelist[neighbourIndex] = neighbour[1] #update neighbours key with new weight
-                    parents[neighbourIndex] = minHeap.heap[i]       #set node to be neighbours parent             
-            i+=1
-        print("Parents for node: " , parents)
-        print("Key values for node: " , minHeap.Edgelist)  
-        print("Node is visited: " , visited) 
-
-        totalWeight=0
-        for i in minHeap.Edgelist:
-            totalWeight +=i 
-        print("total weight: " , totalWeight , ", correct:(function without heap is wrong)")
-
-         #O(n^2)
     def primAlgoHeap(self):
         minHeap = Heap()
         size = len(self.edgesDict)
