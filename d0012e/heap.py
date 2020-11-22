@@ -7,7 +7,6 @@ class Heap:
         self.heap = []            #Heap List
         self.Edgelist = []        #List of corresponding edges
         self.currentSize = 0      #Current size of heap list
-        self.weightlist = []
         self.minsum = 0
 
     
@@ -54,7 +53,6 @@ class Heap:
             return
 
         root = self.Edgelist[0]
-
         self.minsum = self.minsum + self.heap[0]    # Increase the minsum
 
         last = self.heap[self.currentSize - 1]      # Change place with the last node
@@ -65,7 +63,6 @@ class Heap:
         
         del self.Edgelist[self.currentSize - 1]         # Delete last node and Edge
         del self.heap[self.currentSize - 1]
-
         self.currentSize -= 1
         self.minHeapify(0)                              # Now place first element in heap on the right place
 

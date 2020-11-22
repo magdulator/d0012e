@@ -94,10 +94,9 @@ class Graph:
         print("The minimum", minsum)
 
 
-
+    #O(n^2)
     def primAlgoHeap(self):
         h = Heap()
-        minsum = 0
         
         for i in range(self.nodeSize):                                  # Place the amount of nodes in in heap
             h.insert(math.inf, i)

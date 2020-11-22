@@ -143,15 +143,6 @@ class Graph:
         i=0
         while len(minHeap.heap) > i:    #for all nodes
 
-            print(parents)
-            print(visited)
-            print(minHeap.heap)
-            print(i)
-            print(minHeap.Edgelist)
-            print()
-            
-
-            
             visited[i] = True   
 
             smallestEdgeNode = minHeap.heap[i] #gets smallest node, should get smallest key that has not been visited i guess, now you must start at node 0
@@ -161,8 +152,6 @@ class Graph:
             for neighbour in neighbours:
                 neighbourNode = neighbour[0].getNode()
                 neighbourIndex = minHeap.heap.index(int(neighbourNode))
-                print(neighbour)
-                print(neighbourIndex)
                 if neighbour[1] < minHeap.Edgelist[neighbourIndex] and visited[neighbourIndex] != True: # look if weight to neighbour is smaller than its key 
                     minHeap.Edgelist[neighbourIndex] = neighbour[1] #update neighbours key with new weight
                     parents[neighbourIndex] = minHeap.heap[i]       #set node to be neighbours parent             
