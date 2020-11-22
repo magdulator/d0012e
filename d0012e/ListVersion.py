@@ -142,6 +142,16 @@ class Graph:
         minHeap.Edgelist[0] = 0
         i=0
         while len(minHeap.heap) > i:    #for all nodes
+
+            print(parents)
+            print(visited)
+            print(minHeap.heap)
+            print(i)
+            print(minHeap.Edgelist)
+            print()
+            
+
+            
             visited[i] = True   
 
             smallestEdgeNode = minHeap.heap[i] #gets smallest node, should get smallest key that has not been visited i guess, now you must start at node 0
@@ -151,6 +161,8 @@ class Graph:
             for neighbour in neighbours:
                 neighbourNode = neighbour[0].getNode()
                 neighbourIndex = minHeap.heap.index(int(neighbourNode))
+                print(neighbour)
+                print(neighbourIndex)
                 if neighbour[1] < minHeap.Edgelist[neighbourIndex] and visited[neighbourIndex] != True: # look if weight to neighbour is smaller than its key 
                     minHeap.Edgelist[neighbourIndex] = neighbour[1] #update neighbours key with new weight
                     parents[neighbourIndex] = minHeap.heap[i]       #set node to be neighbours parent             
@@ -187,19 +199,19 @@ g.primAlgo('0')
 g.primHeap()
 
 
-""" g.addNode('a')
-g.addNode('b')
-g.addNode('c')
-g.addNode('j')
-
-g.addEdge('a', 'b', 1)  
-g.addEdge('a', 'c', 2)
-g.addEdge('b', 'c', 3)
-g.addEdge('j', 'q', 5)
-
-g.setWeight('a', 'b', 20) # set new weight of a->b and b-> a
-
-g.printGraph()
-g.printNeighbors('a') """
+##g.addNode('a')
+##g.addNode('b')
+##g.addNode('c')
+##g.addNode('j')
+##
+##g.addEdge('a', 'b', 1)  
+##g.addEdge('a', 'c', 2)
+##g.addEdge('b', 'c', 3)
+##g.addEdge('j', 'q', 5)
+##
+##g.setWeight('a', 'b', 20) # set new weight of a->b and b-> a
+##
+##g.printGraph()
+##g.printNeighbors('a')
 
 

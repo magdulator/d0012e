@@ -1,5 +1,6 @@
 import random
 from heap import Heap
+import math
 
 class Graph:
     def __init__(self):
@@ -12,6 +13,7 @@ class Graph:
         if amount < 2:
             print("Have to be more than 1 nodes")
         else:
+            
             i = 0
             while i < amount:
                 self.addNode(i)
@@ -69,7 +71,8 @@ class Graph:
         for i in range(self.nodeSize):
             print(self.nodes[i], self.matrix[i])
             
-            
+
+
         #0(n^3)
     def primAlgo(self):
         visited = []                    # Visited nodes
@@ -94,45 +97,27 @@ class Graph:
 
     def primAlgoHeap(self):
         h = Heap()
-        visited = [False]*self.nodeSize
-        k = 0
         minsum = 0
-
-        for i in range(self.nodeSize):                  # This just adds all the nodes from the matrix to the heap list
-            for j in range(self.nodeSize):
-                if self.matrix[i][j] > 0:
-                    h.insert(self.matrix[i][j], [i, j])
-
-        h.print()
-
-        while visited != [True]*self.nodeSize:
-            n1 = h.Edgelist[k][0]                       # The two nodes connected to the edge
-            n2 = h.Edgelist[k][1]
-            print(h.Edgelist)
-            print(h.heap)
         
-            if visited == [False]*self.nodeSize:            # First choise when all nodes are unvisited
-                visited[n1] = True
-            if visited[n1] == True and visited[n2] == True: # Dont use two visited nodes 
-                del h.Edgelist[k]
-                del h.heap[k]
-                k = 0                
-            elif (visited[n1] == True and visited[n2] == False) or (visited[n1] == False and visited[n2] == True):    # Use if just one of the nodes are visited
-                minsum = minsum + h.heap[k]                                                                             # Adds the weight
-                visited[n1] = True                                                                                   # Set the nodes as visited
-                visited[n2] = True
-                del h.Edgelist[k]                                                                                        # Delete this edge and weight connected to the edge
-                del h.heap[k]
-                k = 0
-            else:                                                                                                       # Dont use two unvisited nodes and instead look att the next object
-                k = k+1
+        for i in range(self.nodeSize):                                  # Place the amount of nodes in in heap
+            h.insert(math.inf, i)
+        h.heap[0] = 0
+        
+        while len(h.heap) > 0:                                          # Go untill heap is empty 
+            heapnode = h.extractMin()                                   # Take away the first (smallest) int in the list and replace it with the second smallest
+            
+            for j in range(self.nodeSize):                              # Look at neigbours
+                if j in h.Edgelist:                                     # If it is still in Edgelist
+                    if self.matrix[heapnode][j] > 0:                    # Look if it has weight
+                        index = h.Edgelist.index(j)
+                        if h.heap[index] > self.matrix[heapnode][j]:    # If the weight is lower than some other choise same node has replace the weight with the smaller
+                            h.heap[index] = self.matrix[heapnode][j]
+                            h.fixHeap(index)
+                            
+            h.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
+        print("minimum weight is:", h.minsum)
 
 
-                # Start from the start of the heaplist
-                
-        print("Minimal weight is:", minsum)
-
-                
                 
         
     #O(7) + O(5n) + O(2n^2)
@@ -144,6 +129,7 @@ class Graph:
         while i < len(connections):
             node = connections[i]
             i = i + 1
+            
             if connected[node] == False:
                 connected[node] = True
                 for j in range(self.nodeSize):      # place new connections in fifo
@@ -159,10 +145,9 @@ class Graph:
 g = Graph()
 
 
-
-g.getGraph(5,9)
+g.getGraph(100,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
-g.printMatrix()
+##g.printMatrix()
 g.primAlgo()
 g.primAlgoHeap()
