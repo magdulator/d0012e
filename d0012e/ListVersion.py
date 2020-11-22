@@ -165,6 +165,30 @@ class Graph:
             totalWeight +=i 
         print("total weight: " , totalWeight , ", correct:(function without heap is wrong)")
 
+         #O(n^2)
+    def primAlgoHeap(self):
+        minHeap = Heap()
+        size = len(self.edgesDict)
+        
+        for i in range(size):                                  # Place the amount of nodes in in heap
+            minHeap.insert(1000, i)
+        minHeap.heap[0] = 0
+
+        while len(minHeap.heap) > 0:                                          # Go untill heap is empty 
+            heapnode = minHeap.extractMin()                                   # Take away the first (smallest) int in the list and replace it with the second smallest
+            neighbours = self.edgesDict.get(str(heapnode)).getNeigbours().items()
+            for neighbour in neighbours:                                
+                neighbourNode = int(neighbour[0].getNode())                  #loop through all neighbours
+
+                if neighbourNode in minHeap.Edgelist:                        # If it is still in Edgelist
+                    index = minHeap.Edgelist.index(neighbourNode)
+                    if neighbour[1] < minHeap.heap[index]:                   # If the weight is lower than some other choise same node has replace the weight with the smaller    
+                        minHeap.heap[index] = neighbour[1]          
+                        minHeap.fixHeap(index)                      
+                            
+            minHeap.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
+        print("minimum weight is:", minHeap.minsum)
+
 
 g = Graph()
 
@@ -185,9 +209,9 @@ g.addEdge('1', '4', 9)
 #g.printGraph()
 
 g.primAlgo('0')
-g.primHeap()
+#g.primHeap()
 
-
+g.primAlgoHeap()
 ##g.addNode('a')
 ##g.addNode('b')
 ##g.addNode('c')
