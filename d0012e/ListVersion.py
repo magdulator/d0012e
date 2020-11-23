@@ -109,7 +109,7 @@ class Graph:
                     if n2.getNode() not in n1.getConnections():
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
-    # O(N^3/2)
+    # O(N^2 + E)
     def primAlgo(self, startNode):
         start_time = time.time()
         visited = [startNode]           #add all visited nodes to list 
