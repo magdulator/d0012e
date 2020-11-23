@@ -110,27 +110,22 @@ class Graph:
 
     def primAlgo(self, startNode):
         start_time = time.time()
-        visited = [startNode]   #add all visited nodes to list 
+        visited = [startNode]           #add all visited nodes to list 
         totalCost = 0
-        i=0
-        while i < len(visited): 
-
-            for key in visited: # looks att all nodes that has been visited for smallest edge
-                neighbours = self.edgesDict.get(key).getNeigbours().items()  # {objekt: weight}
-                minWeight = -1
-                for neighbour in neighbours:   
-                    if neighbour[0].getNode() not in visited:   #index 0 = object holding node, index 1 = weight
-                        if neighbour[1] < minWeight or minWeight == -1: #looks at all the neighbour weights for node to get minimum
+        chosenNode = 0
+        while range(len(visited)) != range(len(self.edgesDict)): 
+            minWeight = -1
+            for key in visited:         # looks att all nodes that has been visited for smallest edge
+                neighbours = self.edgesDict.get(key).getNeigbours().items()     # {objekt: weight}
+                for neighbour in neighbours:                                  
+                    if neighbour[0].getNode() not in visited:                   #index 0 = object holding node, index 1 = weight
+                        if neighbour[1] < minWeight or minWeight == -1:      #looks at all the neighbour weights for node to get minimum
                             minWeight = neighbour[1]
-                            chosenNode = neighbour[0].getNode() 
-                            visited.append(chosenNode)
-                if(minWeight!= -1):
-                    print (minWeight)
-                    totalCost += minWeight
-            print((visited[i]) + " -> ")
+                            chosenNode = neighbour[0].getNode()
+            visited.append(chosenNode) 
+            totalCost += minWeight
 
-            i+=1
-        print("Total weight without heap: " + str(totalCost) + " TAKES WRONG PATH \n")
+        print("Total weight without heap: " + str(totalCost))
         print ("Time for prim without heap: ", time.time() - start_time)
 
     def primAlgoHeap(self):
@@ -163,7 +158,7 @@ g = Graph()
 
 g.makeGraph(100, 10)
 
-g.printGraph()
+#g.printGraph()
 
 g.primAlgo('0')
 #g.primHeap()
