@@ -143,8 +143,8 @@ class Graph:
             for neighbour in neighbours:                                
                 neighbourNode = int(neighbour[0].getNode())                  #loop through all neighbours
 
-                if neighbourNode in minHeap.Edgelist:                        # If it is still in Edgelist
-                    index = minHeap.Edgelist.index(neighbourNode)
+                if neighbourNode in minHeap.nodeList:                        # If it is still in nodeList WHICH ARE NODES
+                    index = minHeap.nodeList.index(neighbourNode)
                     if neighbour[1] < minHeap.heap[index]:                   # If the weight is lower than some other choise same node has replace the weight with the smaller    
                         minHeap.heap[index] = neighbour[1]          
                         minHeap.fixHeap(index)                      

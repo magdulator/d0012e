@@ -77,7 +77,6 @@ class Graph:
 
     #0(n^3)
     def primAlgo(self):
-        start_time = time.time()
         visited = []                    # Visited nodes
         minsum = 0                      # The minimal tree
         visited.append(0)               # Starting index
@@ -95,18 +94,11 @@ class Graph:
             visited.append(best)                                    # Add the new node to visited
             minsum = minsum + minnumber                             # Add the wheigt
             
-<<<<<<< Updated upstream
-        print("The minimum", minsum)
-        print ("Time for prim without heap: ", time.time() - start_time)
-
-=======
         print("The minimum weight is:", minsum)
->>>>>>> Stashed changes
 
 
     #O(n^2)
     def primAlgoHeap(self):
-        start_time = time.time()
         h = Heap()
         
         for i in range(self.nodeSize):                                  # Place the amount of nodes in in heap
@@ -117,20 +109,15 @@ class Graph:
             heapnode = h.extractMin()                                   # Take away the first (smallest) int in the list and replace it with the second smallest
             
             for j in range(self.nodeSize):                              # Look at neigbours
-                if j in h.Edgelist:                                     # If it is still in Edgelist
+                if j in h.nodeList:                                     # If it is still in nodeList
                     if self.matrix[heapnode][j] > 0:                    # Look if it has weight
-                        index = h.Edgelist.index(j)
+                        index = h.nodeList.index(j)
                         if h.heap[index] > self.matrix[heapnode][j]:    # If the weight is lower than some other choise same node has replace the weight with the smaller
                             h.heap[index] = self.matrix[heapnode][j]
                             h.fixHeap(index)
                             
             h.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
-<<<<<<< Updated upstream
-        print("minimum weight is:", h.minsum)
-        print ("Time for prim with heap: ", time.time() - start_time)
-=======
         print("The minimum weight is:", h.minsum)
->>>>>>> Stashed changes
 
 
                 
