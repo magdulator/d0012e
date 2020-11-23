@@ -77,6 +77,7 @@ class Graph:
 
     #0(n^3)
     def primAlgo(self):
+        start_time = time.time()
         visited = []                    # Visited nodes
         minsum = 0                      # The minimal tree
         visited.append(0)               # Starting index
@@ -95,10 +96,12 @@ class Graph:
             minsum = minsum + minnumber                             # Add the wheigt
             
         print("The minimum weight is:", minsum)
+        print ("Time for prim with heap: ", time.time() - start_time)
 
 
     #O(n^2)
     def primAlgoHeap(self):
+        start_time = time.time()
         h = Heap()
         
         for i in range(self.nodeSize):                                  # Place the amount of nodes in in heap
@@ -118,6 +121,7 @@ class Graph:
                             
             h.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
         print("The minimum weight is:", h.minsum)
+        print ("Time for prim with heap: ", time.time() - start_time)
 
 
                 
