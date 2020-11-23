@@ -1,5 +1,6 @@
 import random
 import time
+import math
 from heap import Heap
 class Edge: 
     def __init__(self, node):
@@ -108,6 +109,7 @@ class Graph:
                     if n2.getNode() not in n1.getConnections():
                         self.addEdge(n1.getNode(), n2.getNode(), random.randint(1, maxWeight))
 
+    # O(N^3/2)
     def primAlgo(self, startNode):
         start_time = time.time()
         visited = [startNode]           #add all visited nodes to list 
@@ -126,15 +128,16 @@ class Graph:
             totalCost += minWeight
 
         print("Total weight without heap: " + str(totalCost))
-        print ("Time for prim without heap: ", time.time() - start_time)
+        #print ("Time for prim without heap: ", time.time() - start_time)
 
+    # O(E+N)*log(N))
     def primAlgoHeap(self):
         start_time = time.time()
         minHeap = Heap()
         size = len(self.edgesDict)
         
         for i in range(size):                                  # Place the amount of nodes in in heap
-            minHeap.insert(1000, i)
+            minHeap.insert(math.inf, i)
         minHeap.heap[0] = 0
 
         while len(minHeap.heap) > 0:                                          # Go untill heap is empty 
@@ -151,7 +154,7 @@ class Graph:
                             
             minHeap.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
         print("minimum weight is:", minHeap.minsum)
-        print ("Time for prim with heap: ", time.time() - start_time)
+        #print ("Time for prim with heap: ", time.time() - start_time)
 
 
 g = Graph()
