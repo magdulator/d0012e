@@ -24,6 +24,7 @@ class Graph:
                 v1 = random.choice(self.nodes)
                 v2 = random.choice(self.nodes)
                 if (v1 != v2):
+                    
                     self.addEdge(v1, v2, randomnumber)
                 
                 
@@ -74,7 +75,7 @@ class Graph:
             
 
 
-        #0(n^3)
+    #0(n^3)
     def primAlgo(self):
         start_time = time.time()
         visited = []                    # Visited nodes
@@ -93,9 +94,14 @@ class Graph:
                             best = j               
             visited.append(best)                                    # Add the new node to visited
             minsum = minsum + minnumber                             # Add the wheigt
+            
+<<<<<<< Updated upstream
         print("The minimum", minsum)
         print ("Time for prim without heap: ", time.time() - start_time)
 
+=======
+        print("The minimum weight is:", minsum)
+>>>>>>> Stashed changes
 
 
     #O(n^2)
@@ -119,8 +125,12 @@ class Graph:
                             h.fixHeap(index)
                             
             h.minHeapify(0)                                             # Look at the first element in list and make sure its the lowest
+<<<<<<< Updated upstream
         print("minimum weight is:", h.minsum)
         print ("Time for prim with heap: ", time.time() - start_time)
+=======
+        print("The minimum weight is:", h.minsum)
+>>>>>>> Stashed changes
 
 
                 
@@ -153,6 +163,6 @@ g = Graph()
 g.getGraph(100,9)
 g.getConnected()
 g.setWeight(1, 2, 9)
-##g.printMatrix()
+#g.printMatrix()
 g.primAlgo()
 g.primAlgoHeap()
