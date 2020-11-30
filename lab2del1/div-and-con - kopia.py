@@ -18,6 +18,7 @@ def divideAndFindLargest(randomList):
     else:
         m = int(len(randomList)/3)
     
+
         aList = randomList[0:m]
         bList = randomList[m:m*2]
         cList = randomList[m*2:]
