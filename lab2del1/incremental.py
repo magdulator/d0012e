@@ -6,29 +6,32 @@ def generateList(maxNum, length):
         n = random.randint(0,maxNum)
         randomList.append(n)   
     return randomList
+  
 
 def incrementalAlgo(randomList):
+    
     print(randomList)
-    countArray = [0]*(max(randomList)+1) 
-    sortedArray = [0]*(len(randomList)+1) 
+    minList = [1000]*3
+    
+    if len(randomList) < 3:
+        return "List too small"    
+    
+    for i in range(len(randomList)):
+        current = randomList[i]
 
-    for i in range(0, len(randomList)):
-        countArray[randomList[i]] += 1
-    print("Occurrencies for each index:            ", countArray)
+        if(current < minList[0]):
+            minList = [current, minList[0], minList[1]]
 
-    for i in range(0, len(countArray)-1):
-        countArray[i+1] = countArray[i] + countArray[i + 1]
-    print("Add occurrency with previous occurency: ", countArray)
+        elif(current < minList[1]):
+            minList = [minList[0], current, minList[1]]
 
-    for i in range(0, len(randomList)):
-        putInList = randomList[i]
-        sortedArray[countArray[putInList]] = putInList
-        countArray[putInList] -= 1
-    del(sortedArray[0])
-    print(sortedArray)
+        elif(current < minList[2]):
+            minList[2] = current
+
+    print (minList)
 
 def main():
-    random = generateList(10, 10)
+    random = generateList(20, 10)
     incrementalAlgo(random)
 
 main()
