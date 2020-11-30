@@ -9,6 +9,7 @@ class Graph:
         self.nodeSize = 0   # amount of nodes
         self.matrix = []    # the matrix with lists in lists
         self.maxweight = 0
+        g = 0
         
     def getGraph(self, amount, maxweight):
         if amount < 2:
@@ -24,6 +25,7 @@ class Graph:
                 v1 = random.choice(self.nodes)
                 v2 = random.choice(self.nodes)
                 if (v1 != v2):
+                    g = g+1
                     
                     self.addEdge(v1, v2, randomnumber)
                 
@@ -77,7 +79,7 @@ class Graph:
 
     #0(n^3)
     def primAlgo(self):
-        start_time = time.time()
+#        start_time = time.time()
         visited = []                    # Visited nodes
         minsum = 0                      # The minimal tree
         visited.append(0)               # Starting index
@@ -96,7 +98,7 @@ class Graph:
             minsum = minsum + minnumber                             # Add the wheigt
             
         print("The minimum weight is:", minsum)
-        print ("Time for prim with heap: ", time.time() - start_time)
+#        print ("Time for prim with heap: ", time.time() - start_time)
 
 
     #O(n^2)
@@ -151,9 +153,9 @@ class Graph:
 g = Graph()
 
 
-g.getGraph(100,9)
-g.getConnected()
-g.setWeight(1, 2, 9)
+g.getGraph(2000,9)
+#g.getConnected()
+#g.setWeight(1, 2, 9)
 #g.printMatrix()
-g.primAlgo()
+#g.primAlgo()
 g.primAlgoHeap()

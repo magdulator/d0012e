@@ -25,6 +25,7 @@ def divideAndFindLargest(randomList):
     else:
         m = int(len(randomList)/2)
     
+
         aList = randomList[0:m]
         bList = randomList[m:]
         A = divideAndFindLargest(aList)
