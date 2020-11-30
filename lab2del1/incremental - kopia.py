@@ -11,11 +11,11 @@ def incrementalAlgo(randomList):
     print(randomList)
     result = [sys.maxsize]*3
     for i in randomList:
-        if i > result[0]:
+        if i < result[0]:
             result = [i,result[0],result[1]]
-        elif i > result[1]: 
+        elif i < result[1]: 
             result = [result[0],i,result[1]]
-        elif i > result[2]:
+        elif i < result[2]:
             result = [result[0],result[1],i]
     return result
 
