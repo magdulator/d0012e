@@ -1,6 +1,6 @@
 import random
 import sys
-
+import time
 
 def generateList(maxNum, length):
     randomList = []
@@ -30,12 +30,22 @@ def DivideAndConquerQ(arr):
     crossBest = max(right)/min(left)
 
     # Return the best of the three
+
     return max(leftBest, rightBest, crossBest)
 
-
+def test():
+    i = 0
+    while i <= 5001:
+        random = generateList(30, i)
+        starttime = time.time()
+        (DivideAndConquerQ(random))
+        timetaken = time.time()
+        f = open("myfile.txt", "a")
+        f.write(str(i)+" " +str(timetaken-starttime) + "\n")
+        f.close()
+        i += 200
+        
 def main():
-    random = generateList(16, 10)
-    print(random)
-    print(DivideAndConquerQ(random))
+    test()
 
 main()
