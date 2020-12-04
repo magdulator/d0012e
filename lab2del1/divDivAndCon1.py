@@ -1,6 +1,6 @@
 import random
 import sys
-
+import time
 def generateList(maxNum, length):
     randomList = []
     for i in range(0, length):
@@ -16,11 +16,13 @@ def difDivAndCon(arr):
 
     if arr[l-1] > arr[l]:
         return difDivAndCon(arr[:l])
-    elif arr[0] > arr[1]:
+    elif arr[0] > arr[1] or arr[0] > arr[l-1]:
         return difDivAndCon(arr[1:])
     else:
         arr.pop(l-1)
         return difDivAndCon(arr)
+
+        
 
         
 
@@ -29,8 +31,11 @@ def difDivAndCon(arr):
 
 
 def main():
-    random = generateList(12, 12)
+    random = generateList(10, 10)
     print(random)
-    print(difDivAndCon(random))
 
+
+    starttime = time.time()
+    print(difDivAndCon(random))
+    print(time.time() - starttime)
 main()
