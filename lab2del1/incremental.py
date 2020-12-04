@@ -9,7 +9,6 @@ def generateList(maxNum, length):
   
 
 def incrementalAlgo(randomList):
-    
     print(randomList)
     minList = [1000]*3
     
@@ -21,13 +20,12 @@ def incrementalAlgo(randomList):
 
         if(current < minList[0]):
             minList = [current, minList[0], minList[1]]
-
+            
         elif(current < minList[1]):
             minList = [minList[0], current, minList[1]]
-
+            
         elif(current < minList[2]):
             minList[2] = current
-
     print (minList)
 
 def main():
