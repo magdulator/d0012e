@@ -1,10 +1,14 @@
 #tagga inte beat
 import random
+import time
 def main():
-    random = generateList(12, 12)
+    random = generateList(12, 384)
     print(random)
+    seconds = time.time()
     print(divideAndFindLargest(random))
-
+    secondsafter = time.time()
+    resulttime = secondsafter - seconds 
+    print(resulttime)
 
 def generateList(maxNum, length):
     randomList = []
