@@ -1,6 +1,7 @@
 import random
 import sys
 import time
+
 def generateList(maxNum, length):
     randomList = []
     for i in range(0, length):
@@ -31,7 +32,9 @@ def difDivAndCon(arr):
 
 
 def main():
-    random = generateList(10, 10)
+
+    sys.setrecursionlimit(sys.maxsize) 
+    random = generateList(100, 2000)
     print(random)
 
 
