@@ -1,0 +1,43 @@
+#tagga inte beat
+import random
+import time
+def main():
+    random = generateList(12, 6)
+    print(random)
+    seconds = time.time()
+    print(divideAndFindSmallest(random))
+    secondsafter = time.time()
+    resulttime = secondsafter - seconds 
+    print(resulttime)
+
+def generateList(maxNum, length):
+    randomList = []
+    for i in range(0, length):
+        n = random.randint(0,maxNum)
+        randomList.append(n)   
+    return randomList
+#######################################################
+#Finds the 3 smallest values in a list.
+#Time Complexity = O(n)
+def divideAndFindSmallest(randomList):
+    if 3 == len(randomList):
+        return randomList
+    else:
+        m = int(len(randomList)-1)
+        
+        if randomList[m] <= randomList[0]:
+            return divideAndFindSmallest([randomList[m]] + randomList[:m])
+        elif randomList[m] <= randomList[1]:
+            return divideAndFindSmallest([randomList[0]] + [randomList[m]] + randomList[1:m])
+        elif randomList[m] <= randomList[2]:
+            return divideAndFindSmallest(randomList[0:2] + [randomList[m]] + randomList[2:m])
+        else:
+            randomList.pop(m)
+            return divideAndFindSmallest(randomList)
+
+
+
+
+
+
+main()
