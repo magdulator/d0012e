@@ -2,7 +2,7 @@
 import random
 import time
 def main():
-    random = generateList(0, 4)
+    random = generateList(10, 4)
     
     print(random)
     seconds = time.time()
@@ -26,7 +26,7 @@ def divideAndFindSmallest(randomList):
     else:
         m = int(len(randomList)-1)
         
-        if randomList[m] <= randomList[0]:
+        if randomList[m] < randomList[0]:
             return divideAndFindSmallest([randomList[m]] + randomList[:m])
         elif randomList[m] < randomList[1]:
             return divideAndFindSmallest([randomList[0]] + [randomList[m]] + randomList[1:m])
