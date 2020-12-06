@@ -52,12 +52,12 @@ def maxMiddleSum(arr, f, m, l):
     
     # Calculates Maximum sum right side of mid
     tmp = 0
-    rightSum = sys.maxsize * -1
+    rightSum = sys.maxsize * -1 
     for i in range(m + 1, l + 1):
         tmp += arr[i]
         if (tmp > rightSum):
             rightSum = tmp
-    #Returns sum of elements on left and right side of mid
+   
     return leftSum + rightSum
 
 
