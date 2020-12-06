@@ -46,6 +46,28 @@ def test():
         i += 200
         
 def main():
-    test()
+    random = generateList(10, 16)
+    print(DivideAndConquerQ(random))
+    print(random)
+    
+    
+#    test()
 
 main()
+
+
+# T(1) = 1 , (*)
+# T(n) = 2T(n/2) + O(n), when n>2. (**)
+#
+# T(n) = (**)
+# 2T(n/2) + n = (**)
+# 2(2(n/4) + n/2 ) + n = 4T(n/4) + 2n = (**)
+# 2^k(T(n/2^k)) + kn = (**)
+
+# k = logn
+
+# 2^logn*(T(n/2^logn)) + n*logn= (**)
+# n*T(1) + n*logn = n + logn = (**)
+#
+# ==> O(nlogn) == theta(nlogn)
+

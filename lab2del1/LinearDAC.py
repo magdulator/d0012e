@@ -23,18 +23,12 @@ def difDivAndCon(arr):
         arr.pop(l-1)
         return difDivAndCon(arr)
 
-        
-
-        
-
-    
-
-
+ 
 
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
-    random = generateList(100, 2000)
+    random = generateList(10, 16)
     print(random)
 
 
@@ -42,3 +36,14 @@ def main():
     print(difDivAndCon(random))
     print(time.time() - starttime)
 main()
+
+
+# T(2) = 1 , (*)
+# T(n) = 3 + T(n-1), when n>2. (**)
+#
+# T(n) = (**)
+# 3 + T(n-1) = (**)
+# 3 + ( 3 + T(n-2)) = 6 + T(n-2) = (**)
+# 3k + T(n-k) = .. = 3(n-2) + T(2) = 3n - 5
+#  
+# ==> O(n)

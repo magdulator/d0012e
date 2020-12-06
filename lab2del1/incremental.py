@@ -1,4 +1,5 @@
 import random
+import math
 
 def generateList(maxNum, length):
     randomList = []
@@ -10,7 +11,7 @@ def generateList(maxNum, length):
 
 def incrementalAlgo(randomList):
     print(randomList)
-    minList = [1000]*3
+    minList = [math.inf]*3
     
     if len(randomList) < 3:
         return "List too small"    
@@ -23,7 +24,7 @@ def incrementalAlgo(randomList):
             
         elif(current < minList[1]):
             minList = [minList[0], current, minList[1]]
-            
+
         elif(current < minList[2]):
             minList[2] = current
     print (minList)
@@ -33,3 +34,8 @@ def main():
     incrementalAlgo(random)
 
 main()
+
+# W(3) = 3
+# W(n) = 3(n-3) = 3n - 9, n>3
+
+# 3n -9 = O(n)
