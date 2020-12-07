@@ -9,6 +9,7 @@ def generateList(maxNum, length):
         randomList.append(n)   
     return randomList
 
+<<<<<<< Updated upstream
 def difDivAndCon(arr, smallestNum):
     
     if len(arr) == 1:
@@ -17,27 +18,38 @@ def difDivAndCon(arr, smallestNum):
     else:
         if (arr[0] < smallestNum):
             smallestNum = arr[0]
+=======
+def difDivAndCon(arr):
+    if len(arr) == 2:
+        return arr[1]/arr[0]
+>>>>>>> Stashed changes
 
-        quota = difDivAndCon(arr[1:], smallestNum)
+    l = len(arr)-1
 
-        if (arr[0]/smallestNum > quota ):
-            return arr[0]/smallestNum
-        else:
-            return quota
-        
-        
-        
+    if arr[l-1] > arr[l]:
+        return difDivAndCon(arr[:l])
+    elif arr[0] > arr[1] or arr[0] > arr[l-1]:
+        return difDivAndCon(arr[1:])
+    else:
+        arr.pop(l-1)
+        return difDivAndCon(arr)
+
+ 
 
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
+<<<<<<< Updated upstream
     random = generateList(20, 4)
     random = [11, 2, 7, 6]
+=======
+    random = generateList(10, 16)
+>>>>>>> Stashed changes
     print(random)
 
 
     starttime = time.time()
-    print(difDivAndCon(random, sys.maxsize))
+    print(difDivAndCon(random))
     print(time.time() - starttime)
 main()
 
