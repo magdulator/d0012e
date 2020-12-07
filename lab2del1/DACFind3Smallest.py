@@ -36,7 +36,6 @@ def divideAndFindSmallest(randomList):
             randomList.pop(m)
             return divideAndFindSmallest(randomList)
 
-
 main()
 
 

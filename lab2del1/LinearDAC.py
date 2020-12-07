@@ -25,18 +25,37 @@ def difDivAndCon(arr, smallestNum):
         else:
             return difDivAndCon(arr[1:], smallestNum)
 
-
+def findMaximumQuote(arr):
+    if 2 == len(arr):
+        return arr[1]/arr[0], arr[0], arr[1]
+    else: 
+        h = len(arr)//2
+        
+        (rightQuote, minRight, maxRight) = findMaximumQuote(arr[h:]) # Case 1: in the left side
+        (leftQuote, minLeft, maxLeft) = findMaximumQuote(arr[:h]) # Case 2: in the right side
+        (middleQuote, minMiddle, maxMiddle) = findQuoteMiddle(minLeft, maxLeft, minRight, maxRight)
+        if (arr.index(minMiddle) > arr.index(maxMiddle)):
+            middleQuote = max(rightQuote, leftQuote)
+        return max(rightQuote, leftQuote, middleQuote), min(minRight, minLeft, maxLeft), max(minRight, maxRight, maxLeft)
+        
+def findQuoteMiddle(a, b, c, d):
+    if max(b, c, d) == d:
+        return d/min(a, b, c), min(a,b,c), d
+    elif max(b, c, d) == c:
+        return c/min(a, b), min(a,b), c
+    else:
+        return b/a, a, b
 
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
-    random = generateList(20, 4)
-
+    random = generateList(20, 8)
     print(random)
 
 
     starttime = time.time()
-    print(difDivAndCon(random, sys.maxsize))
+    #print(difDivAndCon(random, sys.maxsize))
+    print(findMaximumQuote(random))
     print(time.time() - starttime)
 main()
 
