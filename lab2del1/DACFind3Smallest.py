@@ -2,7 +2,7 @@
 import random
 import time
 def main():
-    random = generateList(0, 4)
+    random = generateList(10, 16)
     
     print(random)
     seconds = time.time()

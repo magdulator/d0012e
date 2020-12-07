@@ -9,7 +9,6 @@ def generateList(maxNum, length):
         randomList.append(n)   
     return randomList
 
-<<<<<<< Updated upstream
 def difDivAndCon(arr, smallestNum):
     
     if len(arr) == 1:
@@ -18,11 +17,11 @@ def difDivAndCon(arr, smallestNum):
     else:
         if (arr[0] < smallestNum):
             smallestNum = arr[0]
-=======
+
 def difDivAndCon(arr):
     if len(arr) == 2:
         return arr[1]/arr[0]
->>>>>>> Stashed changes
+
 
     l = len(arr)-1
 
@@ -39,12 +38,12 @@ def difDivAndCon(arr):
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
-<<<<<<< Updated upstream
+
     random = generateList(20, 4)
     random = [11, 2, 7, 6]
-=======
+
     random = generateList(10, 16)
->>>>>>> Stashed changes
+
     print(random)
 
 
