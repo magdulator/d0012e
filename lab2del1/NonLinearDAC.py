@@ -23,7 +23,7 @@ def DivideAndConquerQ(arr):
     rightBest = DivideAndConquerQ(right)    # assume i and j is in the right
 
     crossBest = max(right)/min(left)    #assume i is in the left and j in the right
-
+    
     return max(leftBest, rightBest, crossBest) # returns best of three
 
 def test():
