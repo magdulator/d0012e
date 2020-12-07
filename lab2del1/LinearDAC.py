@@ -11,19 +11,18 @@ def generateList(maxNum, length):
 
 def difDivAndCon(arr, smallestNum):
     
-    if len(arr) == 1:
-        smallestNum = arr[0]
+
+    if len(arr) == 0:
         return 0
     else:
+        tmp = smallestNum
         if (arr[0] < smallestNum):
             smallestNum = arr[0]
-
-        quota = difDivAndCon(arr[1:], smallestNum)
-
-        if (arr[0]/smallestNum > quota ):
-            return arr[0]/smallestNum
+        if (arr[0]/tmp > difDivAndCon(arr[1:], smallestNum) ):
+            return arr[0]/tmp
+        
         else:
-            return quota
+            return difDivAndCon(arr[1:], smallestNum)
         
         
         
@@ -32,7 +31,6 @@ def main():
 
     sys.setrecursionlimit(sys.maxsize) 
     random = generateList(20, 4)
-    random = [11, 2, 7, 6]
     print(random)
 
 
