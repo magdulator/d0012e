@@ -2,7 +2,7 @@
 import random
 import time
 def main():
-    random = generateList(10, 16)
+    random = generateList(10, 12)
     
     print(random)
     seconds = time.time()
@@ -20,21 +20,26 @@ def generateList(maxNum, length):
 #######################################################
 #Finds the 3 smallest values in a list.
 #Time Complexity = O(n)
-def divideAndFindSmallest(randomList):
-    if randomList[0] <= randomList[1] <= randomList[2] and len(randomList) <= 3:
-        return randomList
+def divideAndFindSmallest(arr):
+    if len(arr) == 3:
+        return arr
     else:
-        m = int(len(randomList)-1)
+        h = len(arr)//2
+
+        lst = divideAndFindSmallest(arr[h:]) + divideAndFindSmallest(arr[:h])
         
-        if randomList[m] < randomList[0]:
-            return divideAndFindSmallest([randomList[m]] + randomList[:m])
-        elif randomList[m] < randomList[1]:
-            return divideAndFindSmallest([randomList[0]] + [randomList[m]] + randomList[1:m])
-        elif randomList[m] < randomList[2]:
-            return divideAndFindSmallest(randomList[0:2] + [randomList[m]] + randomList[2:m])
-        else:
-            randomList.pop(m)
-            return divideAndFindSmallest(randomList)
+        minList = []
+        tmp = min(lst)
+        minList.append(tmp)
+        lst.pop(lst.index(tmp))
+        tmp = min(lst)
+        minList.append(tmp)
+        lst.pop(lst.index(tmp))
+        tmp = min(lst)
+        minList.append(tmp)
+        lst.pop(lst.index(tmp))
+        return minList
+        
 
 main()
 
