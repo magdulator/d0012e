@@ -18,19 +18,20 @@ def difDivAndCon(arr, smallestNum):
         tmp = smallestNum
         if (arr[0] < smallestNum):
             smallestNum = arr[0]
+
         if (arr[0]/tmp > difDivAndCon(arr[1:], smallestNum) ):
             return arr[0]/tmp
         
         else:
             return difDivAndCon(arr[1:], smallestNum)
-        
-        
-        
+
+
 
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
     random = generateList(20, 4)
+
     print(random)
 
 
