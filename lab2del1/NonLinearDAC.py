@@ -9,29 +9,22 @@ def generateList(maxNum, length):
         randomList.append(n)   
     return randomList
 
-#https://stackoverflow.com/questions/40503101/divide-and-conquer-to-find-maximum-difference-in-an-array
-#T(n) = 2T(n/2) + O(n)
-#T(n) = O(nlogn)
   
 def DivideAndConquerQ(arr):
-    if len(arr) <= 1:
-        return 0
+    #print(arr)
+    if len(arr) == 2:
+        return arr[1]/arr[0]
 
-    mid=int(len(arr)/2)
-    # Cut the array into two 
+    mid=int(len(arr)/2)     # Cut the array into two 
     left  = arr[0:mid]
     right = arr[mid:]
 
-    # assume i and j is in left and i and j is in right seperately
-    leftBest  = DivideAndConquerQ(left)
-    rightBest = DivideAndConquerQ(right)
+    leftBest  = DivideAndConquerQ(left)     # assume i and j is in left
+    rightBest = DivideAndConquerQ(right)    # assume i and j is in the right
 
-    #assume i in left and j in right
-    crossBest = max(right)/min(left)
+    crossBest = max(right)/min(left)    #assume i is in the left and j in the right
 
-    # Return the best of the three
-
-    return max(leftBest, rightBest, crossBest)
+    return max(leftBest, rightBest, crossBest) # returns best of three
 
 def test():
     i = 0
