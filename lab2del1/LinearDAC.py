@@ -21,25 +21,27 @@ def findMaximumQuote(arr):
     else: 
         h = len(arr)//2
         
-        (rightQuote, minRight, maxRight) = findMaximumQuote(arr[h:]) # Case 1: in the left side
+        (rightQuote, minRight, maxRight) = findMaximumQuote(arr[h:]) # Case 1: in the right
         (leftQuote, minLeft, maxLeft) = findMaximumQuote(arr[:h]) # Case 2: in the right side
-        (middleQuote, minMiddle, maxMiddle) = findQuoteMiddle(minLeft, maxLeft, minRight, maxRight)
-        if (arr.index(minMiddle) > arr.index(maxMiddle)):
-            middleQuote = max(rightQuote, leftQuote)
-        return max(maxLeft/minLeft, maxRight/minRight, middleQuote, rightQuote, leftQuote), minMiddle, maxMiddle
+        result = max(rightQuote, leftQuote, max(minRight, maxRight)/min(minLeft, maxLeft))
+
+        if arr.index(maxLeft) > arr.index(minLeft):
+            result = max(result, maxLeft/minLeft)
+        if arr.index(maxRight) > arr.index(minRight):
+            result = max(result, maxRight/minLeft)
+        return result, min(minLeft, minRight, maxRight, maxLeft), max(maxLeft, maxRight, minLeft, minRight), 
         
-def findQuoteMiddle(a, b, c, d):
-    return max(a,b,c,d)/min(a,b,c,d)
+
 
 def main():
 
     sys.setrecursionlimit(sys.maxsize) 
-    random = generateList(10, 16)
+    random = generateList(20, 8)
     print(random)
 
 
     starttime = time.time()
-    print(difDivAndCon(random))
+    print(findMaximumQuote(random))
     print(time.time() - starttime)
 main()
 
