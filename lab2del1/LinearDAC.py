@@ -36,15 +36,10 @@ def findMaximumQuote(arr):
         (middleQuote, minMiddle, maxMiddle) = findQuoteMiddle(minLeft, maxLeft, minRight, maxRight)
         if (arr.index(minMiddle) > arr.index(maxMiddle)):
             middleQuote = max(rightQuote, leftQuote)
-        return max(rightQuote, leftQuote, middleQuote), min(minRight, minLeft, maxLeft), max(minRight, maxRight, maxLeft)
+        return max(maxLeft/minLeft, maxRight/minRight, middleQuote, rightQuote, leftQuote), minMiddle, maxMiddle
         
 def findQuoteMiddle(a, b, c, d):
-    if max(b, c, d) == d:
-        return d/min(a, b, c), min(a,b,c), d
-    elif max(b, c, d) == c:
-        return c/min(a, b), min(a,b), c
-    else:
-        return b/a, a, b
+    return max(a,b,c,d)/min(a,b,c,d)
 
 def main():
 
