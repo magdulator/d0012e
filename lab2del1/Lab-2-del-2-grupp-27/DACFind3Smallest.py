@@ -1,9 +1,9 @@
 #tagga inte beat
 import random
 import time
+import math
 def main():
-    random = generateList(10, 12)
-    random = [3, 2, 1]
+    random = generateList(100, 24)
     print(random)
     seconds = time.time()
     
@@ -23,23 +23,36 @@ def generateList(maxNum, length):
 #Time Complexity = O(n)
 def divideAndFindSmallest(arr):
     if len(arr) == 3:
-        return arr
+        r = [math.inf]*3
+        for i in range(len(arr)):
+            current = arr[i]
+            if(current < arr[0]):
+                r = [current, r[0], r[1]]
+
+            elif(current < arr[1]):
+                r = [r[0], current, r[1]]
+
+            elif(current < arr[2]):
+                r = [r[1], r[2], current]
+        return r
+        
+
     else:
         h = len(arr)//2
 
         lst = divideAndFindSmallest(arr[h:]) + divideAndFindSmallest(arr[:h])
         
-        minList = []
+        arr = []
         tmp = min(lst)
-        minList.append(tmp)
+        arr.append(tmp)
         lst.pop(lst.index(tmp))
         tmp = min(lst)
-        minList.append(tmp)
+        arr.append(tmp)
         lst.pop(lst.index(tmp))
         tmp = min(lst)
-        minList.append(tmp)
+        arr.append(tmp)
         lst.pop(lst.index(tmp))
-        return minList
+        return arr
         
 
 main()
