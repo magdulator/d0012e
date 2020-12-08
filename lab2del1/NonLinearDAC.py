@@ -27,8 +27,8 @@ def DivideAndConquerQ(arr):
     return max(leftBest, rightBest, crossBest) # returns best of three
 
 def test():
-    i = 0
-    while i <= 5001:
+    i = 2
+    while i <= 16384:
         random = generateList(30, i)
         starttime = time.time()
         (DivideAndConquerQ(random))
@@ -36,7 +36,7 @@ def test():
         f = open("myfile.txt", "a")
         f.write(str(i)+" " +str(timetaken-starttime) + "\n")
         f.close()
-        i += 200
+        i *= 2
         
 def main():
     random = generateList(10, 16)
@@ -44,7 +44,7 @@ def main():
     print(random)
     
     
-#    test()
+#test()
 
 main()
 
