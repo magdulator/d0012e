@@ -2,11 +2,11 @@ import random
 import sys
 import time
 def main():
-    random = generateList(12, 10)
+    random = generateList(10, 5)
     print(random)
     seconds = time.time()
     if isListAllPositive:
-        print(incrementalSubSum)
+        print(incrementalSubSum(random))
     else:
         print(consecutiveDAC(random, 0, len(random)-1))
     print(time.time()-seconds)
@@ -14,9 +14,9 @@ def main():
 def generateList(maxNum, length):
     randomList = []
     i = 0
-    while i < maxNum:
-        n = random.randint(maxNum*-1,maxNum) #Både positiva och negativa tal generator
-        #n = random.randint(1,maxNum) #Bara positiva tal generator
+    while i < length:
+        #n = random.randint(maxNum*-1,maxNum) #Både positiva och negativa tal generator
+        n = random.randint(1,maxNum) #Bara positiva tal generator
         if n != 0:
             randomList.append(n) 
             i += 1  
@@ -31,10 +31,10 @@ def isListAllPositive(arr):
 #Adderar alla tal i en lista till en summa
 #Time complexity O(n)
 def incrementalSubSum(arr):
-    sum = 0
-    for i in arr:
-        sum += i
-    return sum
+    if len(arr) == 0:
+        return 0
+    else:
+        return incrementalSubSum(arr[1:]) + arr[0]
 
 # based on https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
 # maxMiddleSum(arr, firstIndex, middleIndex, lastIndex)

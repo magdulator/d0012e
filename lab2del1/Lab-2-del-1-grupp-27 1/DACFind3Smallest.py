@@ -24,16 +24,16 @@ def generateList(maxNum, length):
 def divideAndFindSmallest(arr):
     if len(arr) == 3:
         r = [math.inf]*3
-        for i in range(len(arr)):
+        for i in range(len(r)):
             current = arr[i]
-            if(current < arr[0]):
+            if(current < r[0]):
                 r = [current, r[0], r[1]]
 
-            elif(current < arr[1]):
+            elif(current < r[1]):
                 r = [r[0], current, r[1]]
 
-            elif(current < arr[2]):
-                r = [r[1], r[2], current]
+            elif(current < r[2]):
+                r = [r[0], r[1], current]
         return r
         
 
