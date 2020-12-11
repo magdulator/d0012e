@@ -13,7 +13,10 @@ def generateList(maxNum, length):
 def findBiggestQuota(arr):
     #print(arr)
     if len(arr) == 2:
-        return arr[1]/arr[0]
+        if arr[1] > arr[0]:
+            return arr[1]/arr[0]
+        else:
+            return arr[0]/arr[1]
 
     m=int(len(arr)/2)     # Cut the array into two 
     
@@ -26,8 +29,8 @@ def findBiggestQuota(arr):
     return max(leftBest, rightBest, middleBest) # returns best of three
 
 def test():
-    i = 0
-    while i <= 5001:
+    i = 2
+    while i <= 16384:
         random = generateList(30, i)
         starttime = time.time()
         (findBiggestQuota(random))
@@ -35,7 +38,7 @@ def test():
         f = open("myfile.txt", "a")
         f.write(str(i)+" " +str(timetaken-starttime) + "\n")
         f.close()
-        i += 200
+        i *= 2
         
 def main():
     random = generateList(10, 16)
@@ -43,7 +46,7 @@ def main():
     print(random)
     
     
-#    test()
+#test()
 
 main()
 
