@@ -5,7 +5,7 @@ def main():
     random = generateList(10, 5)
     print(random)
     seconds = time.time()
-    if isListAllPositive:
+    if isListAllPositive(random):
         print(incrementalSubSum(random))
     else:
         print(consecutiveDAC(random, 0, len(random)-1))
@@ -15,8 +15,8 @@ def generateList(maxNum, length):
     randomList = []
     i = 0
     while i < length:
-        #n = random.randint(maxNum*-1,maxNum) #Både positiva och negativa tal generator
-        n = random.randint(1,maxNum) #Bara positiva tal generator
+        n = random.randint(maxNum*-1,maxNum) #Både positiva och negativa tal generator
+        #n = random.randint(1,maxNum) #Bara positiva tal generator
         if n != 0:
             randomList.append(n) 
             i += 1  
@@ -24,10 +24,11 @@ def generateList(maxNum, length):
 
 #Checks if all numbers in list is a positive number
 def isListAllPositive(arr):
+    key = True
     for i in arr:
-        if arr[i] < 0:
-            return False
-    return True
+        if i < 0:
+            key = False
+    return key
 #Adderar alla tal i en lista till en summa
 #Time complexity O(n)
 def incrementalSubSum(arr):
