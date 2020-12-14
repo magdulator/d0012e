@@ -2,7 +2,7 @@ import random
 import sys
 import time
 def main():
-    random = generateList(10, 6)
+    random = generateList(10, 5)
     print(random)
     seconds = time.time()
     if isListAllPositive(random):
@@ -33,7 +33,7 @@ def isListAllPositive(arr):
 #Time complexity O(n)
 def incrementalSubSum(arr):
     if len(arr) == 0:
-        return 0
+        return 1
     else:
         return incrementalSubSum(arr[1:]) * arr[0]
 
@@ -43,7 +43,8 @@ def incrementalSubSum(arr):
 # Time complexity O(n)
 def maxMiddleSum(arr, f, m, l):
 
-    # Calculates Maximum sum left side of mid
+    # Calculates the product of left side
+    # Keeps a copy of positive product incase uneven amount of negative numbers
     left = 1
     positiveLeft = 1
     for i in range(m, f-1, -1):
@@ -51,7 +52,8 @@ def maxMiddleSum(arr, f, m, l):
         if left > 0:
             positiveLeft = left
     
-    # Calculates Maximum sum right side of mid
+    # Calculates the product of right side
+    # Keeps a copy of positive product incase uneven amount of negative numbers
     right = 1
     positiveRight = 1
     for i in range(m + 1, l + 1):
