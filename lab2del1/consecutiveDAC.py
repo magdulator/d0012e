@@ -3,6 +3,7 @@ import sys
 import time
 def main():
     random = generateList(10, 5)
+    random = [-10, 5, 2, -5, 4, -5]
     print(random)
     seconds = time.time()
     if isListAllPositive(random):
@@ -47,21 +48,27 @@ def maxMiddleSum(arr, f, m, l):
     # Keeps a copy of positive product incase uneven amount of negative numbers
     left = 1
     positiveLeft = 1
+    negativeLeft = 1
     for i in range(m, f-1, -1):
         left *= arr[i]
         if left > 0:
             positiveLeft = left
+        else:
+            negativeLeft = left
     
     # Calculates the product of right side
     # Keeps a copy of positive product incase uneven amount of negative numbers
     right = 1
     positiveRight = 1
+    negativeRight = 1
     for i in range(m + 1, l + 1):
         right *= arr[i]
         if right > 0:
             positiveRight = right
+        else:
+            negativeRight = right
 
-    return max(positiveRight*positiveLeft, left*right)
+    return max(positiveRight*positiveLeft, left*right, negativeLeft*negativeRight)
 
 
 # consecutiveDAC(list, firstindex, lastindex)
