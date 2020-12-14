@@ -3,11 +3,11 @@ import sys
 import time
 def main():
     random = generateList(10, 5)
-    random = [-10, 5, 2, -5, 4, -5]
+    random = [0.5, 0.2, 7, 0.5 ,3, 7, 8, 0.5, 0.2]
     print(random)
     seconds = time.time()
     if isListAllPositive(random):
-        print(incrementalSubSum(random))
+        print(incrementalSubSum(random, 0, [], 1, []))
     else:
         print(consecutiveDAC(random, 0, len(random)-1))
     print(time.time()-seconds)
@@ -32,11 +32,44 @@ def isListAllPositive(arr):
     return key
 #Adderar alla tal i en lista till en summa
 #Time complexity O(n)
-def incrementalSubSum(arr):
+
+
+# arr = arr
+# maxSoFar = (håller koll på det största man har fått)
+# List = subarray
+# Temp = Används när man får ett mindre tal för att kolla vidare från den för att
+# se om man får ett bättre resultat senare
+def incrementalSubSum(arr, maxSoFar, MaxList, Temp, Templist):
     if len(arr) == 0:
-        return 1
+        return MaxList, maxSoFar
+    
     else:
-        return incrementalSubSum(arr[1:]) * arr[0]
+
+                    
+        Templist.append(arr[0])
+        Temp = Temp*arr[0]
+        
+        print("")
+
+        print(arr, maxSoFar, MaxList, Temp, Templist)
+        
+        if Temp > maxSoFar:
+                maxSoFar = Temp
+                MaxList = Templist
+
+        print(Temp, maxSoFar, MaxList)
+
+        if Temp < 1:
+            Temp = 1
+            Templist = []
+            
+        
+        
+               
+        return incrementalSubSum(arr[1:], maxSoFar, MaxList, Temp, Templist)
+
+       
+        
 
 # based on https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
 # maxMiddleSum(arr, firstIndex, middleIndex, lastIndex)
