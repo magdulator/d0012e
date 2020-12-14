@@ -2,7 +2,7 @@ import random
 import sys
 import time
 def main():
-    random = generateList(10, 5)
+    random = generateList(10, 6)
     print(random)
     seconds = time.time()
     if isListAllPositive(random):
@@ -35,7 +35,7 @@ def incrementalSubSum(arr):
     if len(arr) == 0:
         return 0
     else:
-        return incrementalSubSum(arr[1:]) + arr[0]
+        return incrementalSubSum(arr[1:]) * arr[0]
 
 # based on https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
 # maxMiddleSum(arr, firstIndex, middleIndex, lastIndex)
@@ -44,22 +44,22 @@ def incrementalSubSum(arr):
 def maxMiddleSum(arr, f, m, l):
 
     # Calculates Maximum sum left side of mid
-    tmp = 0
-    leftSum = sys.maxsize * -1
+    left = 1
+    positiveLeft = 1
     for i in range(m, f-1, -1):
-        tmp += arr[i]
-        if (tmp > leftSum):
-            leftSum = tmp
+        left *= arr[i]
+        if left > 0:
+            positiveLeft = left
     
     # Calculates Maximum sum right side of mid
-    tmp = 0
-    rightSum = sys.maxsize * -1 
+    right = 1
+    positiveRight = 1
     for i in range(m + 1, l + 1):
-        tmp += arr[i]
-        if (tmp > rightSum):
-            rightSum = tmp
-   
-    return leftSum + rightSum
+        right *= arr[i]
+        if right > 0:
+            positiveRight = right
+
+    return max(positiveRight*positiveLeft, left*right)
 
 
 # consecutiveDAC(list, firstindex, lastindex)
