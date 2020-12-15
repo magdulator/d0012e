@@ -2,8 +2,8 @@ import random
 import sys
 import time
 def main():
-#    random = generateList(10, 5)
-    random = [0.5, 0.9, 7, 0.7, 0.5, 5, 0.1, 6, 0.9, 2, 0.1, 1000, 0.5, 2.7]
+    random = generateList(3, 10)
+#    random = [0,5,5,0.1,54,0.6,6,0.11,0.1,100]
     print(random)
     seconds = time.time()
     if isListAllPositive(random):
@@ -16,8 +16,8 @@ def generateList(maxNum, length):
     randomList = []
     i = 0
     while i < length:
-        n = random.randint(maxNum*-1,maxNum) #Både positiva och negativa tal generator
-        #n = random.randint(1,maxNum) #Bara positiva tal generator
+        #n = round(random.uniform(maxNum*-1,maxNum), 2) #Både positiva och negativa tal generator
+        n = round(random.uniform(0,maxNum), 2) #Bara positiva tal generator
         if n != 0:
             randomList.append(n) 
             i += 1  
