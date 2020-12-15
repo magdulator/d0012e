@@ -16,8 +16,8 @@ def generateList(maxNum, length):
     randomList = []
     i = 0
     while i < length:
-        #n = round(random.uniform(maxNum*-1,maxNum), 2) #Både positiva och negativa tal generator
-        n = round(random.uniform(0,maxNum), 2) #Bara positiva tal generator
+        n = round(random.uniform(maxNum*-1,maxNum), 2) #Både positiva och negativa tal generator
+        #n = round(random.uniform(0,maxNum), 2) #Bara positiva tal generator
         if n != 0:
             randomList.append(n) 
             i += 1  
@@ -66,10 +66,8 @@ def incrementalSubSum(arr, maxSoFar, MaxList, Temp, Templist):
 # Time complexity O(n)
 def maxMiddleSum(arr, f, m, l):
 
-    # Calculates the product of left side
-    # Keeps a copy of positive product incase uneven amount of negative numbers
-    posLIndex = 0
-    negLIndex = 0
+    posBottom = 0
+    negBottom = 0
     left = 1
     positiveLeft = 1
     negativeLeft = 1
@@ -77,34 +75,33 @@ def maxMiddleSum(arr, f, m, l):
         left *= arr[i]
         if left > 0 and positiveLeft < left:
             positiveLeft = left
-            posLIndex = i
-        elif positiveLeft > left:
+            posBottom = i
+        elif negativeLeft > left:
             negativeLeft = left
-            negLIndex = i
-    
+            negBottom = i
+
     # Calculates the product of right side
     # Keeps a copy of positive product incase uneven amount of negative numbers
-    posRIndex = 0
-    negRIndex = 0
+    posTop = 0
+    negTop = 0
     right = 1
-    positiveRight = 1
-    negativeRight = 1
+    positiveRight = 0
+    negativeRight = 0
     for i in range(m + 1, l + 1):
         right *= arr[i]
         if right > 0 and positiveRight < right:
             positiveRight = right
-            posRIndex = i
+            posTop = i+1
         elif negativeRight > right:
             negativeRight = right
-            negRIndex = i
+            negTop = i+1
 
-
-    pos = positiveLeft*positiveRight
-    neg = negativeLeft*negativeRight
-    if max(pos, neg) == pos:
-        return pos, arr[posLIndex:posRIndex]
+    positive = positiveRight*positiveLeft
+    negative = negativeLeft*negativeRight
+    if negative > positive:
+        return negative, arr[negBottom:negTop]
     else:
-        return neg, arr[negLIndex:negRIndex]
+        return positive, arr[posBottom:posTop]
 
 
 # consecutiveDAC(list, firstindex, lastindex)
@@ -115,7 +112,7 @@ def consecutiveDAC(arr, f, l):
         return arr[f], arr
     else:
         m = int((f + l) / 2)
-    return max(consecutiveDAC(arr, f, m),    #Case 1: subarray is in lowerhalf of list
+        return max(consecutiveDAC(arr, f, m),    #Case 1: subarray is in lowerhalf of list
                consecutiveDAC(arr, m+1, l),  #Case 2: subarray is in higherhalf of list
                maxMiddleSum(arr, f, m, l))   #Case 3: subarray is in split between higher and lower of list
         
