@@ -68,29 +68,43 @@ def maxMiddleSum(arr, f, m, l):
 
     # Calculates the product of left side
     # Keeps a copy of positive product incase uneven amount of negative numbers
+    posLIndex = 0
+    negLIndex = 0
     left = 1
     positiveLeft = 1
     negativeLeft = 1
     for i in range(m, f-1, -1):
         left *= arr[i]
-        if left > 0:
+        if left > 0 and positiveLeft < left:
             positiveLeft = left
-        else:
+            posLIndex = i
+        elif positiveLeft > left:
             negativeLeft = left
+            negLIndex = i
     
     # Calculates the product of right side
     # Keeps a copy of positive product incase uneven amount of negative numbers
+    posRIndex = 0
+    negRIndex = 0
     right = 1
     positiveRight = 1
     negativeRight = 1
     for i in range(m + 1, l + 1):
         right *= arr[i]
-        if right > 0:
+        if right > 0 and positiveRight < right:
             positiveRight = right
-        else:
+            posRIndex = i
+        elif negativeRight > right:
             negativeRight = right
+            negRIndex = i
 
-    return max(positiveRight*positiveLeft, left*right, negativeLeft*negativeRight)
+
+    pos = positiveLeft*positiveRight
+    neg = negativeLeft*negativeRight
+    if max(pos, neg) == pos:
+        return pos, arr[posLIndex:posRIndex]
+    else:
+        return neg, arr[negLIndex:negRIndex]
 
 
 # consecutiveDAC(list, firstindex, lastindex)
@@ -98,7 +112,7 @@ def maxMiddleSum(arr, f, m, l):
 # Time Complexity O(n*log(n))
 def consecutiveDAC(arr, f, l):
     if f == l:
-        return arr[f]
+        return arr[f], arr
     else:
         m = int((f + l) / 2)
     return max(consecutiveDAC(arr, f, m),    #Case 1: subarray is in lowerhalf of list
